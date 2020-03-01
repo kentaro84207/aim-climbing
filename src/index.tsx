@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import firebase from 'firebase/app';
+import firebaseConfig from './firebase-config';
+import FirebaseApp from './FirebaseApp';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+firebase.initializeApp(firebaseConfig);
+
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <FirebaseApp>
+      <App />
+    </FirebaseApp>
   </BrowserRouter>,
   document.getElementById('root'),
 );
