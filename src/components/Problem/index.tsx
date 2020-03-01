@@ -2,7 +2,7 @@ import React from 'react';
 import HomeContainer from 'containers/Home/HomeContainer';
 import Typography from '@material-ui/core/Typography';
 
-const Home: React.FC = () => {
+const Problem: React.FC = () => {
   return (
     <HomeContainer>
       <Typography component="h1" variant="h5">
@@ -12,4 +12,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Problem;

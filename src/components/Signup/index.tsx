@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Signin: React.FC = () => {
+const Signup: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -34,7 +34,7 @@ const Signin: React.FC = () => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          ログイン
+          新規登録
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -42,10 +42,10 @@ const Signin: React.FC = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="name"
+            label="ニックネーム"
+            name="name"
+            autoComplete="name"
             autoFocus
           />
           <TextField
@@ -53,8 +53,18 @@ const Signin: React.FC = () => {
             margin="normal"
             required
             fullWidth
+            id="email"
+            label="メールアドレス"
+            name="email"
+            autoComplete="email"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             name="password"
-            label="Password"
+            label="パスワード"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -66,24 +76,12 @@ const Signin: React.FC = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            登録する
           </Button>
-          {/* <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid> */}
         </form>
       </div>
     </Container>
   );
 };
 
-export default Signin;
+export default Signup;
