@@ -1,14 +1,17 @@
 import React from 'react';
-import HomeContainer from 'containers/Home/HomeContainer';
+import { useParams } from 'react-router-dom';
+import ProblemContainer from 'containers/Home/ProblemContainer';
 import Typography from '@material-ui/core/Typography';
 
 const Problem: React.FC = () => {
+  const { problemId } = useParams();
+
   return (
-    <HomeContainer>
+    <ProblemContainer>
       <Typography component="h1" variant="h5">
-        課題一覧
+        課題{problemId}
       </Typography>
-    </HomeContainer>
+    </ProblemContainer>
   );
 };
 

@@ -1,17 +1,16 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import HomeContainer from 'containers/Home/HomeContainer';
 import Typography from '@material-ui/core/Typography';
-import ResultTable from 'components/common/table/resultTable';
 
-const Result: React.FC = () => {
+const Problem: React.FC = () => {
   return (
     <HomeContainer>
       <Typography component="h1" variant="h5">
-        リザルト
+        マイページ
       </Typography>
-      <ResultTable />
     </HomeContainer>
   );
 };
 
-export default Result;
+export default Problem;

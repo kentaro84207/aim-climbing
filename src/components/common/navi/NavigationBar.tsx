@@ -46,7 +46,7 @@ const NavigationBar: React.FC = () => {
       />
       <BottomNavigationAction
         component={Link}
-        to={paths.problem}
+        to={paths.mypage}
         label="追加"
         icon={<AddIcon />}
       />
