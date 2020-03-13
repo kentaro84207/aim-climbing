@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import HomeContainer from 'containers/Home/HomeContainer';
 import Typography from '@material-ui/core/Typography';
 
