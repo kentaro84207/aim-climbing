@@ -4,6 +4,7 @@ import paths from 'paths';
 import Home from './components/Home';
 import Result from './components/Result';
 import Mypage from './components/Mypage';
+import Problem from './components/Problem/index';
 import ProblemShow from './components/Problem/show';
 import ProblemCreate from './components/Problem/create';
 import Signin from './components/Signin';
@@ -14,6 +15,7 @@ const App = () => {
     <div className="App">
       <Switch>
         <Route path={paths.home} component={Home} exact />
+        <Route path={paths.problem} component={Problem} exact />
         <Route path={paths.create} component={ProblemCreate} exact />
         <Route
           path={`${paths.problem}/:problemId`}

@@ -41,7 +41,7 @@ const Problem: React.FC = () => {
             </ListItemIcon>
             <ListItemText primary="課題を追加する" />
           </ListItem>
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/problem">
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
@@ -50,7 +50,7 @@ const Problem: React.FC = () => {
         </List>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/problem">
             <ListItemText primary="Trash" />
           </ListItem>
           <ListItemLink>
