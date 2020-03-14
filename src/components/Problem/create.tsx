@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 
-const Create: React.FC = () => {
+const ProblemCreate: React.FC = () => {
   const classes = useStyles();
   const [grade, setGrade] = React.useState('EUR');
   const [fileName, setfileName] = React.useState('');
@@ -113,4 +113,4 @@ const Create: React.FC = () => {
   );
 };
 
-export default Create;
+export default ProblemCreate;

@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Problem: React.FC = () => {
+const ProblemShow: React.FC = () => {
   const classes = useStyles();
   const { problemId } = useParams();
 
@@ -95,4 +95,4 @@ const Problem: React.FC = () => {
   );
 };
 
-export default Problem;
+export default ProblemShow;
