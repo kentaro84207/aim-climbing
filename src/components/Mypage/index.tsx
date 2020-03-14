@@ -35,7 +35,7 @@ const Problem: React.FC = () => {
       </Typography>
       <div className={classes.root}>
         <List component="nav" aria-label="main mailbox folders">
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/problem/new">
             <ListItemIcon>
               <AddIcon />
             </ListItemIcon>
