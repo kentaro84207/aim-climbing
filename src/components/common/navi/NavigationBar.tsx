@@ -5,7 +5,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import ListIcon from '@material-ui/icons/List';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import AddIcon from '@material-ui/icons/Add';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import paths from 'paths';
 
 const useStyles = makeStyles(() => ({
@@ -47,8 +47,8 @@ const NavigationBar: React.FC = () => {
       <BottomNavigationAction
         component={Link}
         to={paths.mypage}
-        label="追加"
-        icon={<AddIcon />}
+        label="マイページ"
+        icon={<PlaylistAddIcon />}
       />
     </BottomNavigation>
   );
