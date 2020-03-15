@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import useProblem from 'hooks/use-problem';
+// import { Problem } from 'services/models/problem';
 import ProblemContainer from 'containers/Home/ProblemContainer';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import CheckboxSwitch from 'components/common/switch/checkbox';
-import test from 'images/test.jpg';
 
 const useStyles = makeStyles(theme => ({
   image: {
@@ -32,11 +33,13 @@ const useStyles = makeStyles(theme => ({
 const ProblemShow: React.FC = () => {
   const classes = useStyles();
   const { problemId } = useParams();
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { problem } = useProblem(problemId!);
 
   return (
     <ProblemContainer>
       <Typography component="h1" variant="h5">
-        課題名{problemId}
+        {problem?.name}
       </Typography>
       <CheckboxSwitch />
 
@@ -62,7 +65,7 @@ const ProblemShow: React.FC = () => {
             グレード
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
-            e
+            {problem?.grade}
           </Typography>
         </div>
         <div className={classes.flex}>
@@ -74,7 +77,7 @@ const ProblemShow: React.FC = () => {
             設定者
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
-            Daniel Woods
+            {problem?.setterName}
           </Typography>
         </div>
         <div className={classes.flex}>
@@ -83,14 +86,14 @@ const ProblemShow: React.FC = () => {
             variant="subtitle1"
             color="textSecondary"
           >
-            初登者
+            補足
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
-            Daniel Woods
+            {problem?.other}
           </Typography>
         </div>
       </div>
-      <img className={classes.image} src={test} alt="" />
+      <img className={classes.image} src={problem?.imageURL} alt="" />
     </ProblemContainer>
   );
 };

@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProblemCard: React.FC<{ problem: Problem }> = ({ problem }) => {
   const classes = useStyles();
-  const { name, grade } = problem;
+  const { name, grade, id } = problem;
 
   return (
     <Card className={classes.root}>
@@ -58,7 +58,7 @@ const ProblemCard: React.FC<{ problem: Problem }> = ({ problem }) => {
             {name}
           </Typography>
         </div>
-        <Link className={classes.center} to="problem/1">
+        <Link className={classes.center} to={`problem/${id}`}>
           <ArrowForwardIosIcon />
         </Link>
       </CardContent>
