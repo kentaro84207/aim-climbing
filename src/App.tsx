@@ -1,24 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router';
+import paths from 'paths';
+import Home from './components/Home';
+import Result from './components/Result';
+import Mypage from './components/Mypage';
+import Problem from './components/Problem/index';
+import ProblemShow from './components/Problem/show';
+import ProblemCreate from './components/Problem/create';
+import Signin from './components/Signin';
+import Signup from './components/Signup';
 
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route path={paths.home} component={Home} exact />
+        <Route path={paths.problem} component={Problem} exact />
+        <Route path={paths.create} component={ProblemCreate} exact />
+        <Route
+          path={`${paths.problem}/:problemId`}
+          component={ProblemShow}
+          exact
+        />
+        <Route path={paths.result} component={Result} />
+        <Route path={paths.mypage} component={Mypage} />
+        <Route path={paths.signin} component={Signin} />
+        <Route path={paths.signup} component={Signup} />
+      </Switch>
     </div>
   );
 };
