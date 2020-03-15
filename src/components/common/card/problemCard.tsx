@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Problem } from 'services/models/problem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -16,51 +17,45 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     width: '100%',
   },
-  row: {
-    display: 'flex',
-    flex: '1 1 auto',
-  },
-  column: {
+  column1: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '1 1 auto',
+    flex: '1 1 30%',
+  },
+  column2: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1 1 60%',
   },
   center: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flex: '1 1 auto',
+    flex: '1 1 10%',
   },
 }));
 
-const ProblemCard: React.FC = () => {
+const ProblemCard: React.FC<{ problem: Problem }> = ({ problem }) => {
   const classes = useStyles();
+  const { name, grade } = problem;
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <div className={classes.column}>
-          <Typography
-            className={classes.row}
-            variant="subtitle1"
-            color="textSecondary"
-          >
-            No.01
+        <div className={classes.column1}>
+          <Typography variant="subtitle1" color="textSecondary">
+            グレード
           </Typography>
-          <Typography className={classes.row} component="h5" variant="h5">
-            e
+          <Typography component="h5" variant="h5">
+            {grade}
           </Typography>
         </div>
-        <div className={classes.column}>
-          <Typography
-            className={classes.row}
-            variant="subtitle1"
-            color="textSecondary"
-          >
-            設定者
+        <div className={classes.column2}>
+          <Typography variant="subtitle1" color="textSecondary">
+            課題名
           </Typography>
-          <Typography className={classes.row} component="h5" variant="h5">
-            Daniel Woods
+          <Typography component="h5" variant="h5">
+            {name}
           </Typography>
         </div>
         <Link className={classes.center} to="problem/1">
