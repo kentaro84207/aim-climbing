@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ProblemContainer from 'containers/Home/ProblemContainer';
+import { FirebaseContext, UserContext } from 'contexts';
+import writeProblem from 'services/write-problem';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import PublishIcon from '@material-ui/icons/Publish';
 import { makeStyles } from '@material-ui/core/styles';
+import { blankProblem } from 'services/models/problem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,15 +27,37 @@ const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 
 const ProblemCreate: React.FC = () => {
   const classes = useStyles();
-  const [grade, setGrade] = React.useState('EUR');
-  const [fileName, setfileName] = React.useState('');
+  const [problem, setProblem] = React.useState({ ...blankProblem });
+  const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(
+    undefined,
+  );
+  const { db } = useContext(FirebaseContext);
+  const { user } = useContext(UserContext);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGrade(event.target.value);
+  const updateProblem = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (user) {
+      setProblem({
+        ...problem,
+        [e.target.name]: e.target.value,
+        setterId: user?.id,
+        setterName: user.displayName,
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/aim-climbing.appspot.com/o/IMG_4470.JPG?alt=media&token=39515fbc-10c7-4c82-95bd-c68dea2c9093',
+      });
+    }
   };
 
-  const getFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setfileName(e.target.files[0].name);
+  const handleImageAsFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const image = e.target.files[0];
+      setImageAsFile(image);
+    }
+  };
+
+  const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (db) writeProblem(db, problem);
+    window.location.replace('/');
   };
 
   return (
@@ -42,15 +67,17 @@ const ProblemCreate: React.FC = () => {
       </Typography>
 
       <div className={classes.root}>
-        <form noValidate autoComplete="off">
+        <form noValidate autoComplete="off" onSubmit={handleFireBaseUpload}>
           <div className={classes.row}>
             <TextField
               required
               fullWidth
               id="problem-name"
               label="課題名"
-              defaultValue=""
+              defaultValue={problem.name}
+              onChange={updateProblem}
               variant="outlined"
+              name="name"
             />
           </div>
           <div className={classes.row}>
@@ -60,10 +87,11 @@ const ProblemCreate: React.FC = () => {
               id="select-grade"
               select
               label="グレード"
-              value={grade}
-              onChange={handleChange}
+              value={problem.grade}
+              onChange={updateProblem}
               helperText="豊田グレードです"
               variant="outlined"
+              name="grade"
             >
               {grades.map(value => (
                 <MenuItem key={value} value={value}>
@@ -77,8 +105,10 @@ const ProblemCreate: React.FC = () => {
               fullWidth
               id="problem-other"
               label="補足"
-              defaultValue=""
+              defaultValue={problem.other}
+              onChange={updateProblem}
               variant="outlined"
+              name="other"
             />
           </div>
           <div className={classes.row}>
@@ -88,7 +118,7 @@ const ProblemCreate: React.FC = () => {
               style={{ display: 'none' }}
               id="button-file"
               type="file"
-              onChange={e => getFileName(e)}
+              onChange={handleImageAsFile}
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="button-file">
@@ -99,11 +129,11 @@ const ProblemCreate: React.FC = () => {
               >
                 トポ画像*
               </Button>
-              <p>{fileName}</p>
+              <p>{imageAsFile?.name}</p>
             </label>
           </div>
           <div className={classes.row}>
-            <Button fullWidth variant="contained" color="primary">
+            <Button fullWidth variant="contained" color="primary" type="submit">
               登録する
             </Button>
           </div>

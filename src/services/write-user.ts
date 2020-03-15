@@ -1,7 +1,5 @@
 import firebase from 'firebase/app';
 import { isEmpty } from 'lodash';
-// import { sprintf } from 'sprintf-js';
-
 import { User, blankUser } from './models/user';
 import { collectionName } from './constants';
 
@@ -15,16 +13,6 @@ const writeUser = async (
   if (!displayName) {
     throw new Error('Invalid credential information.');
   }
-
-  // resolve screenname duplication
-  // const query = await db
-  //   .collection(collectionName.users)
-  //   .where('displayName', '==', displayName)
-  //   .get();
-  // if (query.size) {
-  //   const rnd = Math.floor(Math.random() * 10000);
-  //   displayName = `${displayName}${sprintf('%04d', rnd)}`;
-  // }
 
   let theUser: User | null = null;
   const batch = db.batch();

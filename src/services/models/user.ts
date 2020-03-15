@@ -2,17 +2,13 @@ import { firestore } from 'firebase/app';
 
 export type User = {
   id?: string;
-  displayName: string | null;
-  provider: string | null;
-  providerUid: string | null;
+  displayName: string;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };
 
 export const blankUser: User = {
-  displayName: null,
-  provider: '',
-  providerUid: '',
+  displayName: '',
   createdAt: null,
   updatedAt: null,
 };
