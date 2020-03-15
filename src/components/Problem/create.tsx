@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import PublishIcon from '@material-ui/icons/Publish';
 import { makeStyles } from '@material-ui/core/styles';
-import { blankProblem } from 'services/models/problem';
+import { Problem, blankProblem } from 'services/models/problem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,13 +26,15 @@ const useStyles = makeStyles(theme => ({
 const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 
 const ProblemCreate: React.FC = () => {
+  const { db } = useContext(FirebaseContext);
+  const { user } = useContext(UserContext);
   const classes = useStyles();
-  const [problem, setProblem] = React.useState({ ...blankProblem });
+  const [problem, setProblem] = React.useState<Problem>({
+    ...blankProblem,
+  });
   const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(
     undefined,
   );
-  const { db } = useContext(FirebaseContext);
-  const { user } = useContext(UserContext);
 
   const updateProblem = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user) {
@@ -40,9 +42,7 @@ const ProblemCreate: React.FC = () => {
         ...problem,
         [e.target.name]: e.target.value,
         setterId: user?.id,
-        setterName: user.displayName,
-        imageURL:
-          'https://firebasestorage.googleapis.com/v0/b/aim-climbing.appspot.com/o/IMG_4470.JPG?alt=media&token=39515fbc-10c7-4c82-95bd-c68dea2c9093',
+        setterName: user?.displayName,
       });
     }
   };
@@ -56,8 +56,7 @@ const ProblemCreate: React.FC = () => {
 
   const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (db) writeProblem(db, problem);
-    window.location.replace('/');
+    if (db && imageAsFile) writeProblem(db, problem, imageAsFile);
   };
 
   return (

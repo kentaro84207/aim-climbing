@@ -7,11 +7,13 @@ import { collectionName } from './constants';
 const writeProblem = async (
   db: firebase.firestore.Firestore,
   newProblem: Problem,
+  imageAsFile: File,
   pid?: string,
 ) => {
   let theProblem: Problem | null = null;
   const batch = db.batch();
   const { name, grade, other } = newProblem;
+  const storage = firebase.storage();
 
   if (pid) {
     const problemDoc = await db
@@ -30,20 +32,45 @@ const writeProblem = async (
       });
     }
     theProblem = { ...diff, ...prevProblem, id: problemDoc.id };
+    await batch.commit();
   } else {
     const problemDoc = db.collection(collectionName.problems).doc();
-    const problem: Problem = {
+    let problem: Problem = {
       ...blankProblem,
       ...newProblem,
     };
-    batch.set(problemDoc, {
-      ...problem,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    theProblem = { ...problem, id: problemDoc.id };
+    const uploadTask = storage
+      .ref(`/images/${new Date().getTime().toString(16)}-${imageAsFile.name}`)
+      .put(imageAsFile);
+    uploadTask.on(
+      'state_changed',
+      snapShot => {
+        console.log(snapShot);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        storage
+          .ref('images')
+          .child(imageAsFile.name)
+          .getDownloadURL()
+          .then((fireBaseUrl: string) => {
+            problem = {
+              ...problem,
+              imageURL: fireBaseUrl,
+            };
+            batch.set(problemDoc, {
+              ...problem,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            theProblem = { ...problem, id: problemDoc.id };
+            batch.commit();
+          });
+      },
+    );
   }
-  await batch.commit();
 
   return theProblem;
 };

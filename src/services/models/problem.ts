@@ -3,7 +3,7 @@ import { firestore } from 'firebase/app';
 export type Problem = {
   id?: string;
   setterId?: string;
-  setterName: string;
+  setterName?: string;
   name: string;
   grade: string;
   other?: string;
@@ -13,7 +13,6 @@ export type Problem = {
 };
 
 export const blankProblem: Problem = {
-  setterName: '',
   grade: '',
   name: '',
   other: '',
