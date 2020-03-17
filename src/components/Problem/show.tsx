@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useProblem from 'hooks/use-problem';
-// import { Problem } from 'services/models/problem';
 import ProblemContainer from 'containers/Home/ProblemContainer';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
