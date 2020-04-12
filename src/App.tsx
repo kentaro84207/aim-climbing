@@ -18,6 +18,11 @@ const App = () => {
         <Route path={paths.problem} component={Problem} exact />
         <Route path={paths.create} component={ProblemCreate} exact />
         <Route
+          path={`${paths.edit}/:problemId`}
+          component={ProblemCreate}
+          exact
+        />
+        <Route
           path={`${paths.problem}/:problemId`}
           component={ProblemShow}
           exact

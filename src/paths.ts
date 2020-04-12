@@ -3,6 +3,7 @@ const paths = {
   result: '/result',
   problem: '/problem',
   create: '/problem/new',
+  edit: '/problem/edit',
   mypage: '/mypage',
   signin: '/signin',
   signup: '/signup',
