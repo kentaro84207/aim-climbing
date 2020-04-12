@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProblemContainer from 'containers/Home/ProblemContainer';
 import { FirebaseContext, UserContext } from 'contexts';
 import writeProblem from 'services/write-problem';
+import paths from 'paths';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -35,6 +37,7 @@ const ProblemCreate: React.FC = () => {
   const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(
     undefined,
   );
+  const history = useHistory();
 
   const updateProblem = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user) {
@@ -56,7 +59,13 @@ const ProblemCreate: React.FC = () => {
 
   const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (db && imageAsFile) writeProblem(db, problem, imageAsFile);
+    if (db && imageAsFile) {
+      writeProblem(db, problem, imageAsFile).then(() => {
+        setTimeout(() => {
+          history.replace(paths.home);
+        }, 1000);
+      });
+    }
   };
 
   return (
