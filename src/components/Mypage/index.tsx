@@ -51,8 +51,11 @@ const Problem: React.FC = () => {
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
           <ListItem button component={Link} to="/problem">
-            <ListItemText primary="ログアウト" />
+            <ListItemText primary="Trash" />
           </ListItem>
+          <ListItemLink>
+            <ListItemText primary="Spam" />
+          </ListItemLink>
         </List>
       </div>
     </HomeContainer>
