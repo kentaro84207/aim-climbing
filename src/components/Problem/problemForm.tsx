@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { FirebaseContext, UserContext } from 'contexts';
 import writeProblem from 'services/write-problem';
 import paths from 'paths';
@@ -34,8 +34,8 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
   const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(
     undefined,
   );
-  const history = useHistory();
   const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+  const [done, setDone] = React.useState(false);
 
   const updateProblem = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user) {
@@ -59,12 +59,12 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
     e.preventDefault();
     if (db && imageAsFile) {
       writeProblem(db, newProblem, imageAsFile, pid).then(() => {
-        setTimeout(() => {
-          history.replace(paths.home);
-        }, 1000);
+        setDone(true);
       });
     }
   };
+
+  if (done) return <Redirect to={paths.home} />;
 
   return (
     <div className={classes.root}>
