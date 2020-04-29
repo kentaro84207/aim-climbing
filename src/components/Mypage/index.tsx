@@ -4,7 +4,7 @@ import HomeContainer from 'containers/Home/HomeContainer';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
@@ -19,10 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
   }),
-);
-
-const ListItemLink = (props: ListItemProps<'a', { button?: true }>) => (
-  <ListItem button component="a" {...props} />
 );
 
 const Problem: React.FC = () => {
@@ -50,12 +46,9 @@ const Problem: React.FC = () => {
         </List>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItem button component={Link} to="/problem">
-            <ListItemText primary="Trash" />
+          <ListItem button component={Link} to="/signin">
+            <ListItemText primary="Signin" />
           </ListItem>
-          <ListItemLink>
-            <ListItemText primary="Spam" />
-          </ListItemLink>
         </List>
       </div>
     </HomeContainer>
