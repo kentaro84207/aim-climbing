@@ -7,7 +7,7 @@ import { collectionName } from './constants';
 const writeProblem = async (
   db: firebase.firestore.Firestore,
   newProblem: Problem,
-  imageAsFile: File,
+  imageAsFile?: File,
   pid?: string,
 ) => {
   let theProblem: Problem | null = null;
@@ -33,7 +33,7 @@ const writeProblem = async (
     }
     theProblem = { ...diff, ...prevProblem, id: problemDoc.id };
     await batch.commit();
-  } else {
+  } else if (imageAsFile) {
     const problemDoc = db.collection(collectionName.problems).doc();
     let problem: Problem = {
       ...blankProblem,
