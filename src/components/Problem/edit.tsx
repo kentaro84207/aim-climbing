@@ -16,7 +16,7 @@ const ProblemCreate: React.FC = () => {
         課題を編集する
       </Typography>
 
-      {problem ? <ProblemForm problem={problem} /> : ''}
+      {problem ? <ProblemForm problem={problem} pid={problemId} /> : ''}
     </ProblemContainer>
   );
 };

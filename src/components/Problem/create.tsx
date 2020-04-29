@@ -8,14 +8,15 @@ const ProblemCreate: React.FC = () => {
   const problem = {
     ...blankProblem,
   };
+  const problemId = undefined;
 
   return (
     <ProblemContainer>
       <Typography component="h1" variant="h5">
-        課題を編集する
+        課題を登録する
       </Typography>
 
-      {problem ? <ProblemForm problem={problem} /> : ''}
+      {problem ? <ProblemForm problem={problem} pid={problemId} /> : ''}
     </ProblemContainer>
   );
 };

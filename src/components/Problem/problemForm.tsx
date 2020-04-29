@@ -23,7 +23,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProblemForm: React.FC<{ problem: Problem }> = ({ problem }) => {
+const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
+  problem,
+  pid,
+}) => {
   const { db } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   const classes = useStyles();
@@ -55,7 +58,7 @@ const ProblemForm: React.FC<{ problem: Problem }> = ({ problem }) => {
   const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (db && imageAsFile) {
-      writeProblem(db, newProblem, imageAsFile).then(() => {
+      writeProblem(db, newProblem, imageAsFile, pid).then(() => {
         setTimeout(() => {
           history.replace(paths.home);
         }, 1000);
