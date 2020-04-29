@@ -1,13 +1,14 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import useProblem from 'hooks/use-problem';
 import ProblemContainer from 'containers/Home/ProblemContainer';
 import ProblemForm from 'components/Problem/problemForm';
 import Typography from '@material-ui/core/Typography';
-import { blankProblem } from 'services/models/problem';
 
 const ProblemCreate: React.FC = () => {
-  const problem = {
-    ...blankProblem,
-  };
+  const { problemId } = useParams();
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { problem } = useProblem(problemId!);
 
   return (
     <ProblemContainer>

@@ -7,6 +7,7 @@ import Mypage from './components/Mypage';
 import Problem from './components/Problem/index';
 import ProblemShow from './components/Problem/show';
 import ProblemCreate from './components/Problem/create';
+import ProblemEdit from './components/Problem/edit';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 
@@ -19,7 +20,7 @@ const App = () => {
         <Route path={paths.create} component={ProblemCreate} exact />
         <Route
           path={`${paths.edit}/:problemId`}
-          component={ProblemCreate}
+          component={ProblemEdit}
           exact
         />
         <Route
