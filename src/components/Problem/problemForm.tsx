@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   imageInput: {
     display: 'none',
   },
+  image: {
+    width: '100%',
+  },
 }));
 
 const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
@@ -34,6 +37,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
   const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(
     undefined,
   );
+  const isEditing = !!pid;
   const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
   const [done, setDone] = React.useState(false);
 
@@ -57,9 +61,11 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
 
   const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (db && imageAsFile) {
+    if (db) {
       writeProblem(db, newProblem, imageAsFile, pid).then(() => {
-        setDone(true);
+        setTimeout(() => {
+          setDone(true);
+        }, 1000);
       });
     }
   };
@@ -113,6 +119,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
           />
         </div>
         <div className={classes.row}>
+          <img className={classes.image} src={newProblem?.imageURL} alt="" />
           <input
             required
             accept="image/*"
@@ -127,6 +134,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
               variant="outlined"
               component="span"
               startIcon={<PublishIcon />}
+              style={isEditing ? { display: 'none' } : {}}
             >
               トポ画像*
             </Button>
