@@ -9,6 +9,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: 'block',
+    width: '100%',
+    textDecoration: 'none',
+  },
+  card: {
     display: 'flex',
     width: '100%',
     marginTop: theme.spacing(2),
@@ -40,29 +45,31 @@ const ProblemCard: React.FC<{ problem: Problem }> = ({ problem }) => {
   const { name, grade, id } = problem;
 
   return (
-    <Card className={classes.root}>
-      <CardContent className={classes.content}>
-        <div className={classes.column1}>
-          <Typography variant="subtitle1" color="textSecondary">
-            グレード
-          </Typography>
-          <Typography component="h5" variant="h5">
-            {grade}
-          </Typography>
-        </div>
-        <div className={classes.column2}>
-          <Typography variant="subtitle1" color="textSecondary">
-            課題名
-          </Typography>
-          <Typography component="h5" variant="h5">
-            {name}
-          </Typography>
-        </div>
-        <Link className={classes.center} to={`problem/${id}`}>
-          <ArrowForwardIosIcon />
-        </Link>
-      </CardContent>
-    </Card>
+    <Link className={classes.root} to={`problem/${id}`}>
+      <Card className={classes.card}>
+        <CardContent className={classes.content}>
+          <div className={classes.column1}>
+            <Typography variant="subtitle1" color="textSecondary">
+              グレード
+            </Typography>
+            <Typography component="h5" variant="h5">
+              {grade}
+            </Typography>
+          </div>
+          <div className={classes.column2}>
+            <Typography variant="subtitle1" color="textSecondary">
+              課題名
+            </Typography>
+            <Typography component="h5" variant="h5">
+              {name}
+            </Typography>
+          </div>
+          <span className={classes.center}>
+            <ArrowForwardIosIcon />
+          </span>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 
