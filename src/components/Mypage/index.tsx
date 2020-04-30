@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import HomeContainer from 'containers/Home/HomeContainer';
+import { FirebaseContext, UserContext } from 'contexts';
+import paths from 'paths';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -23,6 +26,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Problem: React.FC = () => {
   const classes = useStyles();
+  const { auth } = useContext(FirebaseContext);
+  const { user } = useContext(UserContext);
+  const history = useHistory();
+  const signOut = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (auth && user) {
+      e.preventDefault();
+      auth.signOut();
+      history.replace(paths.signin);
+    }
+  };
 
   return (
     <HomeContainer>
@@ -48,6 +61,9 @@ const Problem: React.FC = () => {
         <List component="nav" aria-label="secondary mailbox folders">
           <ListItem button component={Link} to="/signin">
             <ListItemText primary="Signin" />
+          </ListItem>
+          <ListItem button onClick={signOut}>
+            <ListItemText primary="Logout" />
           </ListItem>
         </List>
       </div>
