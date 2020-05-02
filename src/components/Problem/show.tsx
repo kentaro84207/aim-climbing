@@ -2,9 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useProblem from 'hooks/use-problem';
 import ProblemContainer from 'containers/Home/ProblemContainer';
+import CheckboxSwitch from 'components/common/switch/checkbox';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import CheckboxSwitch from 'components/common/switch/checkbox';
+import { format } from 'date-fns';
 
 const useStyles = makeStyles(theme => ({
   image: {
@@ -34,6 +35,10 @@ const ProblemShow: React.FC = () => {
   const { problemId } = useParams();
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { problem } = useProblem(problemId!);
+  const createDate =
+    problem && problem.createdAt
+      ? format(problem.createdAt.toDate(), 'yyyy/MM/dd')
+      : '';
 
   return (
     <ProblemContainer>
@@ -49,10 +54,10 @@ const ProblemShow: React.FC = () => {
             variant="subtitle1"
             color="textSecondary"
           >
-            月日
+            作成日
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
-            2019/03/09
+            {createDate}
           </Typography>
         </div>
         <div className={classes.flex}>

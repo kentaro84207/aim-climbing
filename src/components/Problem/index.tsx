@@ -23,7 +23,7 @@ const Problem: React.FC = () => {
   return (
     <ProblemContainer>
       <Typography component="h1" variant="h5">
-        作った課題一覧
+        課題一覧
       </Typography>
       <div className={classes.root}>
         <List component="nav" aria-label="problem list">
