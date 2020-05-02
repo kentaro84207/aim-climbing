@@ -1,7 +1,7 @@
 import React from 'react';
 import useProblems from 'hooks/use-problems';
 import ProblemContainer from 'containers/Home/ProblemContainer';
-import ProblemList from 'components/common/list/problemList';
+import ListIndex from 'components/common/list/listIndex';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,18 +18,16 @@ const useStyles = makeStyles(theme => ({
 
 const Problem: React.FC = () => {
   const classes = useStyles();
-  const { problems } = useProblems({ limit: 50 });
+  const { problems, loading } = useProblems({ limit: 50 });
 
   return (
     <ProblemContainer>
       <Typography component="h1" variant="h5">
-        課題一覧
+        課題を編集・削除
       </Typography>
       <div className={classes.root}>
         <List component="nav" aria-label="problem list">
-          {problems.map(problem => (
-            <ProblemList problem={problem} key={problem.id} />
-          ))}
+          <ListIndex problems={problems} loading={loading} />
         </List>
       </div>
     </ProblemContainer>
