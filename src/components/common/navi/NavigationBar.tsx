@@ -32,12 +32,7 @@ const NavigationBar: React.FC = () => {
       }}
       showLabels
     >
-      <BottomNavigationAction
-        component={Link}
-        to={paths.home}
-        label="一覧"
-        icon={<ListIcon />}
-      />
+      <BottomNavigationAction component={Link} to={paths.home} label="一覧" icon={<ListIcon />} />
       <BottomNavigationAction
         component={Link}
         to={paths.result}

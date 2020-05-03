@@ -26,17 +26,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({
-  problem,
-  pid,
-}) => {
+const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ problem, pid }) => {
   const { db } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   const classes = useStyles();
   const [newProblem, setNewProblem] = React.useState<Problem>(problem);
-  const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(
-    undefined,
-  );
+  const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(undefined);
   const isEditing = !!pid;
   const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
   const [done, setDone] = React.useState(false);
