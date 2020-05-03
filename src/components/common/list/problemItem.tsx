@@ -33,11 +33,7 @@ const ProblemList: React.FC<{ problem: Problem }> = ({ problem }) => {
         </ListItemIcon>
         <ListItemText primary={name} />
         <ListItemSecondaryAction>
-          <IconButton
-            edge="end"
-            aria-label="delete"
-            onClick={handleDeleteProblem}
-          >
+          <IconButton edge="end" aria-label="delete" onClick={handleDeleteProblem}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>

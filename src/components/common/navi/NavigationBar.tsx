@@ -19,33 +19,33 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NavigationBar: React.FC = () => {
+const NavigationBar: React.FC<{ path: string }> = ({ path }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(path);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+    setValue(newValue);
+  };
 
   return (
-    <BottomNavigation
-      className={classes.bottom}
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      showLabels
-    >
+    <BottomNavigation className={classes.bottom} value={value} onChange={handleChange} showLabels>
       <BottomNavigationAction
         component={Link}
+        value="index"
         to={paths.home}
         label="一覧"
         icon={<ListIcon />}
       />
       <BottomNavigationAction
         component={Link}
+        value="result"
         to={paths.result}
         label="リザルト"
         icon={<TrendingUpIcon />}
       />
       <BottomNavigationAction
         component={Link}
+        value="mypage"
         to={paths.mypage}
         label="マイページ"
         icon={<PlaylistAddIcon />}

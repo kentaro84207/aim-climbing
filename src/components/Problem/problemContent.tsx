@@ -4,6 +4,7 @@ import { Problem } from 'services/models/problem';
 import CheckboxSwitch from 'components/common/switch/checkbox';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { format } from 'date-fns';
 
 const useStyles = makeStyles(theme => ({
   image: {
@@ -28,11 +29,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({
-  problem,
-  loading,
-}) => {
+const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ problem, loading }) => {
   const classes = useStyles();
+  const createDate =
+    problem && problem.createdAt ? format(problem.createdAt.toDate(), 'yyyy/MM/dd') : '';
 
   if (loading) return <Circular />;
 
@@ -41,26 +41,18 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({
       <Typography component="h1" variant="h5">
         {problem?.name}
       </Typography>
-      <CheckboxSwitch />
+      <CheckboxSwitch problem={problem} />
       <div className={classes.text}>
         <div className={classes.flex}>
-          <Typography
-            className={classes.column1}
-            variant="subtitle1"
-            color="textSecondary"
-          >
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             月日
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
-            2019/03/09
+            {createDate}
           </Typography>
         </div>
         <div className={classes.flex}>
-          <Typography
-            className={classes.column1}
-            variant="subtitle1"
-            color="textSecondary"
-          >
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             グレード
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
@@ -68,11 +60,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({
           </Typography>
         </div>
         <div className={classes.flex}>
-          <Typography
-            className={classes.column1}
-            variant="subtitle1"
-            color="textSecondary"
-          >
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             設定者
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">
@@ -80,11 +68,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({
           </Typography>
         </div>
         <div className={classes.flex}>
-          <Typography
-            className={classes.column1}
-            variant="subtitle1"
-            color="textSecondary"
-          >
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             補足
           </Typography>
           <Typography className={classes.column2} component="h5" variant="h5">

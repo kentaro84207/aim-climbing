@@ -8,6 +8,7 @@ export type Problem = {
   grade: string;
   other?: string;
   imageURL: string;
+  users: string[];
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };
@@ -17,6 +18,7 @@ export const blankProblem: Problem = {
   name: '',
   other: '',
   imageURL: '',
+  users: [],
   createdAt: null,
   updatedAt: null,
 };

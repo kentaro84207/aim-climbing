@@ -54,7 +54,7 @@ const Problem: React.FC = () => {
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="作った課題" />
+            <ListItemText primary="課題を編集・削除" />
           </ListItem>
         </List>
         <Divider />
