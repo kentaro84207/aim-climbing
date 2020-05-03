@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { User } from 'services/models/user';
 import { Problem } from 'services/models/problem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -40,9 +42,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProblemCard: React.FC<{ problem: Problem }> = ({ problem }) => {
+const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, problem }) => {
   const classes = useStyles();
   const { name, grade, id } = problem;
+
+  const ascentUsers = problem && problem.users ? problem.users : [];
+  const ascentStatus = user && user.id ? ascentUsers.includes(user.id) : false;
+  const statusLabel = ascentStatus ? <CheckCircle color="primary" /> : <RadioButtonUncheckedIcon />;
 
   return (
     <Link className={classes.root} to={`problem/${id}`}>
@@ -64,9 +70,7 @@ const ProblemCard: React.FC<{ problem: Problem }> = ({ problem }) => {
               {name}
             </Typography>
           </div>
-          <span className={classes.center}>
-            <ArrowForwardIosIcon />
-          </span>
+          <div className={classes.center}>{statusLabel}</div>
         </CardContent>
       </Card>
     </Link>
