@@ -10,10 +10,7 @@ import { FirebaseContext, UserContext } from './contexts';
 
 const FirebaseApp: FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [
-    credential,
-    setCredential,
-  ] = useState<firebase.auth.UserCredential | null>(null);
+  const [credential, setCredential] = useState<firebase.auth.UserCredential | null>(null);
   const counterRef = useRef(0);
   const auth = firebase.auth();
   const db = firebase.firestore();

@@ -24,16 +24,8 @@ const App = () => {
             <Switch>
               <Route path={paths.problem} component={Problem} exact />
               <Route path={paths.create} component={ProblemCreate} exact />
-              <Route
-                path={`${paths.edit}/:problemId`}
-                component={ProblemEdit}
-                exact
-              />
-              <Route
-                path={`${paths.problem}/:problemId`}
-                component={ProblemShow}
-                exact
-              />
+              <Route path={`${paths.edit}/:problemId`} component={ProblemEdit} exact />
+              <Route path={`${paths.problem}/:problemId`} component={ProblemShow} exact />
               <Route path={paths.result} component={Result} />
               <Route path={paths.mypage} component={Mypage} />
             </Switch>
