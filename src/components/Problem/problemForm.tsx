@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { FirebaseContext, UserContext } from 'contexts';
 import writeProblem from 'services/write-problem';
 import paths from 'paths';
+import grades from 'common/grades';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -33,7 +34,6 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
   const [newProblem, setNewProblem] = React.useState<Problem>(problem);
   const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(undefined);
   const isEditing = !!pid;
-  const grades = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
   const [done, setDone] = React.useState(false);
 
   const updateProblem = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,11 +56,13 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
 
   const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const settedGrade = newProblem.grade;
+    newProblem.point = grades[settedGrade];
     if (db) {
       writeProblem(db, newProblem, imageAsFile, pid).then(() => {
         setTimeout(() => {
           setDone(true);
-        }, 1000);
+        }, 1500);
       });
     }
   };
@@ -95,7 +97,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
             variant="outlined"
             name="grade"
           >
-            {grades.map(value => (
+            {Object.keys(grades).map(value => (
               <MenuItem key={value} value={value}>
                 {value}
               </MenuItem>

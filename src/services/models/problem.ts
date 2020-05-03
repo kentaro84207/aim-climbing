@@ -9,6 +9,7 @@ export type Problem = {
   other?: string;
   imageURL: string;
   users: string[];
+  point: string;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };
@@ -19,6 +20,7 @@ export const blankProblem: Problem = {
   other: '',
   imageURL: '',
   users: [],
+  point: '',
   createdAt: null,
   updatedAt: null,
 };
