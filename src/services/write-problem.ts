@@ -44,30 +44,37 @@ const writeProblem = async (
       .put(imageAsFile);
     uploadTask.on(
       'state_changed',
-      snapShot => {
-        console.log(snapShot);
+      snapshot => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused');
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running');
+            break;
+          default:
+            console.log('default');
+        }
       },
       err => {
         console.log(err);
       },
       () => {
-        storage
-          .ref('images')
-          .child(imageAsFile.name)
-          .getDownloadURL()
-          .then((fireBaseUrl: string) => {
-            problem = {
-              ...problem,
-              imageURL: fireBaseUrl,
-            };
-            batch.set(problemDoc, {
-              ...problem,
-              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-              updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            });
-            theProblem = { ...problem, id: problemDoc.id };
-            batch.commit();
+        uploadTask.snapshot.ref.getDownloadURL().then((fireBaseUrl: string) => {
+          problem = {
+            ...problem,
+            imageURL: fireBaseUrl,
+          };
+          batch.set(problemDoc, {
+            ...problem,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
           });
+          theProblem = { ...problem, id: problemDoc.id };
+          batch.commit();
+        });
       },
     );
   }
