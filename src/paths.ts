@@ -7,6 +7,7 @@ const paths = {
   mypage: '/mypage',
   signin: '/signin',
   signup: '/signup',
+  login: '/login',
 };
 
 export default paths;

@@ -59,9 +59,6 @@ const Problem: React.FC = () => {
         </List>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItem button component={Link} to="/signin">
-            <ListItemText primary="Signin" />
-          </ListItem>
           <ListItem button onClick={signOut}>
             <ListItemText primary="Logout" />
           </ListItem>
