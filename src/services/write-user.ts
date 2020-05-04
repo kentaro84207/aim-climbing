@@ -3,14 +3,7 @@ import { isEmpty } from 'lodash';
 import { User, blankUser } from './models/user';
 import { collectionName } from './constants';
 
-const writeUser = async (db: firebase.firestore.Firestore, firebaseUser: firebase.User) => {
-  const id = firebaseUser.uid;
-  const { displayName } = firebaseUser;
-
-  if (!displayName) {
-    throw new Error('Invalid credential information.');
-  }
-
+const writeUser = async (db: firebase.firestore.Firestore, id: string, displayName: string) => {
   let theUser: User | null = null;
   const batch = db.batch();
   const userDoc = await db
