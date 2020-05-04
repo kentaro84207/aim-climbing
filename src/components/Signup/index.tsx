@@ -65,7 +65,7 @@ const Signup: React.FC = () => {
       <Typography component="h1" variant="h5">
         新規登録
       </Typography>
-      <form className={classes.form} noValidate onSubmit={signupWithEmailAndPassword}>
+      <form className={classes.form} onSubmit={signupWithEmailAndPassword}>
         <TextField
           variant="outlined"
           margin="normal"

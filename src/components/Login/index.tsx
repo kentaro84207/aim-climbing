@@ -55,7 +55,7 @@ const Login: React.FC = () => {
       <Typography component="h1" variant="h5">
         ログイン
       </Typography>
-      <form className={classes.form} noValidate onSubmit={loginWithEmailAndPassword}>
+      <form className={classes.form} onSubmit={loginWithEmailAndPassword}>
         <TextField
           variant="outlined"
           margin="normal"
