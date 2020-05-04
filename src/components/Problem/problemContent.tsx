@@ -19,13 +19,15 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   column1: {
-    flex: '0 1 30%',
+    width: '30%',
   },
   column2: {
-    flex: '0 1 70%',
+    width: '70%',
+    wordBreak: 'break-all',
   },
   flex: {
     display: 'flex',
+    marginBottom: theme.spacing(2),
   },
 }));
 

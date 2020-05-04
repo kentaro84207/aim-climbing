@@ -3,10 +3,7 @@ import { isEmpty } from 'lodash';
 import { User, blankUser } from './models/user';
 import { collectionName } from './constants';
 
-const writeUser = async (
-  db: firebase.firestore.Firestore,
-  firebaseUser: firebase.User,
-) => {
+const writeUser = async (db: firebase.firestore.Firestore, firebaseUser: firebase.User) => {
   const id = firebaseUser.uid;
   const { displayName } = firebaseUser;
 

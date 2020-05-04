@@ -11,6 +11,11 @@ const switchAscent = async (
   const batch = db.batch();
   const problemRef = db.collection(collectionName.problems).doc(pid);
   const userRef = db.collection(collectionName.users).doc(uid);
+  const userProblemsRef = db
+    .collection(collectionName.users)
+    .doc(uid)
+    .collection(collectionName.problems)
+    .doc(pid);
 
   if (ascent) {
     batch.update(problemRef, {
@@ -20,6 +25,10 @@ const switchAscent = async (
     batch.update(userRef, {
       problems: firebase.firestore.FieldValue.arrayUnion(pid),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    batch.set(userProblemsRef, {
+      problemRef,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     await batch.commit();
   } else if (!ascent) {
@@ -31,6 +40,7 @@ const switchAscent = async (
       problems: firebase.firestore.FieldValue.arrayRemove(pid),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    batch.delete(userProblemsRef);
     await batch.commit();
   }
 };
