@@ -5,7 +5,6 @@ const paths = {
   create: '/problem/new',
   edit: '/problem/edit',
   mypage: '/mypage',
-  signin: '/signin',
   signup: '/signup',
   login: '/login',
 };

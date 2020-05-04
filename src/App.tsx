@@ -8,7 +8,6 @@ import Problem from './components/Problem/index';
 import ProblemShow from './components/Problem/show';
 import ProblemCreate from './components/Problem/create';
 import ProblemEdit from './components/Problem/edit';
-import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Login from './components/Login';
 // import AuthRedirect from './containers/Auth/AuthRedirect';
@@ -19,7 +18,6 @@ const App = () => {
       <Router>
         <Switch>
           <Route path={paths.login} component={Login} />
-          <Route path={paths.signin} component={Signin} />
           <Route path={paths.signup} component={Signup} />
           <Route path={paths.home} component={Home} exact />
           <Route path={paths.problem} component={Problem} exact />

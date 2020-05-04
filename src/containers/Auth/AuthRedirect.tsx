@@ -6,7 +6,7 @@ import paths from 'paths';
 const AuthRedirect: React.FC = ({ children }) => {
   const { user } = useContext(UserContext);
 
-  if (!user) return <Redirect to={paths.signin} />;
+  if (!user) return <Redirect to={paths.login} />;
 
   return <>{children}</>;
 };
