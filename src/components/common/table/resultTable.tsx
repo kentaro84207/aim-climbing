@@ -29,7 +29,9 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
     points,
   });
 
-  const rows = users.map((user: User, i: number) => {
+  const sortedUsers = users.sort((a, b) => Number(b.points) - Number(a.points));
+
+  const rows = sortedUsers.map((user: User, i: number) => {
     const order = i + 1;
     const name = user.displayName;
     const { points } = user;
