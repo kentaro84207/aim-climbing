@@ -15,7 +15,7 @@ const useProblems = () => {
   useEffect(() => {
     const { db } = firebaseRef.current;
     if (!db) throw new Error('Firestore is not initialized');
-    const query = db.collection(collectionName.users).orderBy('points', 'desc');
+    const query = db.collection(collectionName.users);
 
     const load = async () => {
       setLoading(true);

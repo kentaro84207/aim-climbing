@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AuthContainer from 'containers/Auth/AuthContainer';
-import writeUser from 'services/write-user';
-import { FirebaseContext, UserContext } from 'contexts';
+import { FirebaseContext } from 'contexts';
 import paths from 'paths';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -25,11 +24,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Signup: React.FC = () => {
+const Login: React.FC = () => {
   const classes = useStyles();
-  const { auth, db } = useContext(FirebaseContext);
-  const { setCredential } = useContext(UserContext);
-  const [values, setValues] = useState({ name: '', email: '', password: '' });
+  const { auth } = useContext(FirebaseContext);
+  const [values, setValues] = useState({ email: '', password: '' });
   const history = useHistory();
 
   const updateValues = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,21 +37,13 @@ const Signup: React.FC = () => {
     });
   };
 
-  const signupWithEmailAndPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+  const loginWithEmailAndPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (auth && db) {
+    if (auth) {
       try {
-        await auth
-          .createUserWithEmailAndPassword(values.email, values.password)
-          .then(credential => {
-            if (!credential || !credential.user) return;
-            const id = credential.user.uid;
-            setCredential(credential);
-            writeUser(db, id, values.name);
-          })
-          .then(() => {
-            history.replace(paths.home);
-          });
+        await auth.signInWithEmailAndPassword(values.email, values.password).then(() => {
+          history.replace(paths.home);
+        });
       } catch (error) {
         console.log('Signup error', error);
       }
@@ -63,22 +53,9 @@ const Signup: React.FC = () => {
   return (
     <AuthContainer>
       <Typography component="h1" variant="h5">
-        新規登録
+        ログイン
       </Typography>
-      <form className={classes.form} onSubmit={signupWithEmailAndPassword}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="name"
-          label="ニックネーム"
-          name="name"
-          value={values.name}
-          autoComplete="name"
-          autoFocus
-          onChange={updateValues}
-        />
+      <form className={classes.form} onSubmit={loginWithEmailAndPassword}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -111,11 +88,12 @@ const Signup: React.FC = () => {
           color="primary"
           className={classes.submit}
         >
-          登録する
+          ログインする
         </Button>
       </form>
+      <Link to={paths.signup}>新規登録はこちらから</Link>
     </AuthContainer>
   );
 };
 
-export default Signup;
+export default Login;

@@ -18,12 +18,19 @@ const useStyles = makeStyles(theme => ({
   },
   row: {
     marginBottom: theme.spacing(3),
+    position: 'relative',
   },
   imageInput: {
     display: 'none',
   },
   image: {
     width: '100%',
+  },
+  hiddenImage: {
+    opacity: 0,
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
 }));
 
@@ -71,7 +78,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
 
   return (
     <div className={classes.root}>
-      <form noValidate autoComplete="off" onSubmit={handleFireBaseUpload}>
+      <form autoComplete="off" onSubmit={handleFireBaseUpload}>
         <div className={classes.row}>
           <TextField
             required
@@ -119,11 +126,13 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
           <img className={classes.image} src={newProblem?.imageURL} alt="" />
           <input
             required
+            className={classes.hiddenImage}
             accept="image/*"
-            style={{ display: 'none' }}
+            // style={{ display: 'none' }}
             id="button-file"
             type="file"
             onChange={handleImageAsFile}
+            name="image"
           />
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="button-file">

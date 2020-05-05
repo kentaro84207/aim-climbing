@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Problem: React.FC = () => {
+const Mypage: React.FC = () => {
   const classes = useStyles();
   const { auth } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
@@ -33,7 +33,7 @@ const Problem: React.FC = () => {
     if (auth && user) {
       e.preventDefault();
       auth.signOut();
-      history.replace(paths.signin);
+      history.replace(paths.login);
     }
   };
 
@@ -59,9 +59,6 @@ const Problem: React.FC = () => {
         </List>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItem button component={Link} to="/signin">
-            <ListItemText primary="Signin" />
-          </ListItem>
           <ListItem button onClick={signOut}>
             <ListItemText primary="Logout" />
           </ListItem>
@@ -71,4 +68,4 @@ const Problem: React.FC = () => {
   );
 };
 
-export default Problem;
+export default Mypage;
