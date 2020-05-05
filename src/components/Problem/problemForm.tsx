@@ -128,7 +128,6 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
             required
             className={classes.hiddenImage}
             accept="image/*"
-            // style={{ display: 'none' }}
             id="button-file"
             type="file"
             onChange={handleImageAsFile}
