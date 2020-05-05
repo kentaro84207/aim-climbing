@@ -4,7 +4,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import findUser from 'services/find-user';
 import { User } from 'services/models/user';
-import { FirebaseContext, UserContext } from './contexts';
+import { FirebaseContext, UserContext } from 'contexts';
 
 const FirebaseApp: FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
