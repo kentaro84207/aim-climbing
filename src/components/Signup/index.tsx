@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AuthContainer from 'containers/Auth/AuthContainer';
 import writeUser from 'services/write-user';
 import { FirebaseContext, UserContext } from 'contexts';
@@ -114,6 +114,7 @@ const Signup: React.FC = () => {
           登録する
         </Button>
       </form>
+      <Link to={paths.login}>アカウントがある方はこちらからログイン</Link>
     </AuthContainer>
   );
 };

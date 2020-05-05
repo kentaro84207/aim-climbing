@@ -59,8 +59,11 @@ const Mypage: React.FC = () => {
         </List>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
+          <ListItem button component={Link} to="/login">
+            <ListItemText primary="ログイン" />
+          </ListItem>
           <ListItem button onClick={signOut}>
-            <ListItemText primary="Logout" />
+            <ListItemText primary="ログアウト" />
           </ListItem>
         </List>
       </div>
