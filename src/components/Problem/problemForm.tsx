@@ -74,6 +74,20 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
     }
   };
 
+  const imageContent = isEditing ? (
+    <img className={classes.image} src={newProblem?.imageURL} alt="" />
+  ) : (
+    <input
+      required
+      className={classes.hiddenImage}
+      accept="image/*"
+      id="button-file"
+      type="file"
+      onChange={handleImageAsFile}
+      name="image"
+    />
+  );
+
   if (done) return <Redirect to={paths.home} />;
 
   return (
@@ -123,16 +137,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
           />
         </div>
         <div className={classes.row}>
-          <img className={classes.image} src={newProblem?.imageURL} alt="" />
-          <input
-            required
-            className={classes.hiddenImage}
-            accept="image/*"
-            id="button-file"
-            type="file"
-            onChange={handleImageAsFile}
-            name="image"
-          />
+          {imageContent}
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="button-file">
             <Button

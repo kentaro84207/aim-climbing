@@ -15,9 +15,14 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
 
   if (!problems.length) {
     return (
-      <Link style={{ marginTop: '100px' }} to={paths.signup}>
-        アカウントの新規登録はこちらから
-      </Link>
+      <>
+        <Link style={{ marginTop: '100px' }} to={paths.signup}>
+          アカウントの新規登録はこちらから
+        </Link>
+        <Link style={{ marginTop: '50px' }} to={paths.login}>
+          アカウントをお持ちの方はこちらからログイン
+        </Link>
+      </>
     );
   }
 
