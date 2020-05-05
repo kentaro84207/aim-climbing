@@ -20,6 +20,8 @@ const useStyles = makeStyles(theme => ({
   },
   column1: {
     width: '30%',
+    display: 'flex',
+    alignItems: 'center',
   },
   column2: {
     width: '70%',
@@ -49,7 +51,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
           <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             月日
           </Typography>
-          <Typography className={classes.column2} component="h5" variant="h5">
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
             {createDate}
           </Typography>
         </div>
@@ -57,7 +59,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
           <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             グレード
           </Typography>
-          <Typography className={classes.column2} component="h5" variant="h5">
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
             {problem?.grade}
           </Typography>
         </div>
@@ -65,7 +67,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
           <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             設定者
           </Typography>
-          <Typography className={classes.column2} component="h5" variant="h5">
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
             {problem?.setterName}
           </Typography>
         </div>
@@ -73,8 +75,16 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
           <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
             補足
           </Typography>
-          <Typography className={classes.column2} component="h5" variant="h5">
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
             {problem?.other}
+          </Typography>
+        </div>
+        <div className={classes.flex}>
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
+            完登人数
+          </Typography>
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
+            {problem?.users.length}
           </Typography>
         </div>
       </div>
