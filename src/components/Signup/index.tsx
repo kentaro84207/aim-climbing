@@ -43,17 +43,12 @@ const Signup: React.FC = () => {
     e.preventDefault();
     if (auth && db) {
       try {
-        await auth
-          .createUserWithEmailAndPassword(values.email, values.password)
-          .then(credential => {
-            if (!credential || !credential.user) return;
-            const id = credential.user.uid;
-            setCredential(credential);
-            writeUser(db, id, values.name);
-          })
-          .then(() => {
-            history.replace(paths.home);
-          });
+        const credential = await auth.createUserWithEmailAndPassword(values.email, values.password);
+        if (!credential || !credential.user) return;
+        const id = credential.user.uid;
+        setCredential(credential);
+        await writeUser(db, id, values.name);
+        history.replace(paths.home);
       } catch (error) {
         console.log('Signup error', error);
       }

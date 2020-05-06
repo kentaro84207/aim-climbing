@@ -41,9 +41,8 @@ const Login: React.FC = () => {
     e.preventDefault();
     if (auth) {
       try {
-        await auth.signInWithEmailAndPassword(values.email, values.password).then(() => {
-          history.replace(paths.home);
-        });
+        await auth.signInWithEmailAndPassword(values.email, values.password);
+        history.replace(paths.home);
       } catch (error) {
         console.log('Signup error', error);
       }
