@@ -92,7 +92,7 @@ const Signup: React.FC = () => {
           required
           fullWidth
           name="password"
-          label="パスワード"
+          label="パスワード(6桁以上)"
           type="password"
           id="password"
           value={values.password}
