@@ -1,7 +1,10 @@
+/* eslint-disable no-alert */
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import switchAscent from 'services/switch-ascent';
 import { FirebaseContext, UserContext } from 'contexts';
 import { Problem } from 'services/models/problem';
+import paths from 'paths';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -15,12 +18,15 @@ const CheckboxSwitch: React.FC<{ problem: Problem }> = ({ problem }) => {
   const [state, setState] = React.useState({
     checked: ascentStatus,
   });
+  const history = useHistory();
 
   const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const confirmText = state.checked ? '登ってなかった？' : '登った？';
     if (window.confirm(confirmText) && db && user && user.id) {
       switchAscent(db, user.id, pid, !state.checked);
       setState({ ...state, [name]: event.target.checked });
+      const path = state.checked ? `${paths.home}` : `${paths.home}?success=done`;
+      history.push(path);
     }
   };
 

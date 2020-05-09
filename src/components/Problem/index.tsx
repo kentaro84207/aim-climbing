@@ -1,6 +1,6 @@
 import React from 'react';
 import useProblems from 'hooks/use-problems';
-import ProblemContainer from 'containers/Home/ProblemContainer';
+import MypageContainer from 'containers/Home/MypageContainer';
 import ListIndex from 'components/common/list/listIndex';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -21,7 +21,7 @@ const Problem: React.FC = () => {
   const { problems, loading } = useProblems({ limit: 50 });
 
   return (
-    <ProblemContainer>
+    <MypageContainer>
       <Typography component="h1" variant="h5">
         課題を編集・削除
       </Typography>
@@ -30,7 +30,7 @@ const Problem: React.FC = () => {
           <ListIndex problems={problems} loading={loading} />
         </List>
       </div>
-    </ProblemContainer>
+    </MypageContainer>
   );
 };
 
