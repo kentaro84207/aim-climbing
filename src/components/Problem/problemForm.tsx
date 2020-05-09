@@ -41,6 +41,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
   const [newProblem, setNewProblem] = React.useState<Problem>(problem);
   const [imageAsFile, setImageAsFile] = React.useState<File | undefined>(undefined);
   const isEditing = !!pid;
+  const param = isEditing ? '?success=edit' : '?success=create';
   const [done, setDone] = React.useState(false);
 
   const updateProblem = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +89,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
     />
   );
 
-  if (done) return <Redirect to={paths.home} />;
+  if (done) return <Redirect to={`${paths.home}${param}`} />;
 
   return (
     <div className={classes.root}>

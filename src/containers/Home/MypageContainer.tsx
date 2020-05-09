@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import paths from 'paths';
+import { useHistory } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -24,20 +23,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProblemContainer: React.FC = ({ children }) => {
+const MypageContainer: React.FC = ({ children }) => {
   const classes = useStyles();
+  const history = useHistory();
+  const goBack = () => {
+    history.goBack();
+  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Link className={classes.arrow} to={paths.home}>
+        <button className={classes.arrow} onClick={goBack} type="button">
           <ArrowBackIcon fontSize="large" />
-        </Link>
+        </button>
         {children}
       </div>
     </Container>
   );
 };
 
-export default ProblemContainer;
+export default MypageContainer;

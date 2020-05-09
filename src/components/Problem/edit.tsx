@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useProblem from 'hooks/use-problem';
-import ProblemContainer from 'containers/Home/ProblemContainer';
+import MypageContainer from 'containers/Home/MypageContainer';
 import ProblemForm from 'components/Problem/problemForm';
 import Typography from '@material-ui/core/Typography';
 
@@ -11,13 +11,13 @@ const ProblemCreate: React.FC = () => {
   const { problem } = useProblem(problemId!);
 
   return (
-    <ProblemContainer>
+    <MypageContainer>
       <Typography component="h1" variant="h5">
         課題を編集する
       </Typography>
 
       {problem ? <ProblemForm problem={problem} pid={problemId} /> : ''}
-    </ProblemContainer>
+    </MypageContainer>
   );
 };
 
