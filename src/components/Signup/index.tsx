@@ -124,6 +124,7 @@ const Signup: React.FC = () => {
           fullWidth
           variant="contained"
           color="primary"
+          size="large"
           className={classes.submit}
         >
           登録する

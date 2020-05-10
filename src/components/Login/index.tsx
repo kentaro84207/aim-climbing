@@ -79,6 +79,7 @@ const Login: React.FC = () => {
           fullWidth
           variant="contained"
           color="primary"
+          size="large"
           className={classes.submit}
         >
           ログインする
