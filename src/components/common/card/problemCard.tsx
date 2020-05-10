@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
     width: '100%',
-    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   content: {
     display: 'flex',
@@ -58,7 +58,7 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, 
             <Typography variant="subtitle1" color="textSecondary">
               グレード
             </Typography>
-            <Typography component="h5" variant="h5">
+            <Typography component="h5" variant="h6">
               {grade}
             </Typography>
           </div>
@@ -66,7 +66,7 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, 
             <Typography variant="subtitle1" color="textSecondary">
               課題名
             </Typography>
-            <Typography component="h5" variant="h5">
+            <Typography component="h5" variant="h6">
               {name}
             </Typography>
           </div>
