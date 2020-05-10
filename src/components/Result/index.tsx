@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeContainer from 'containers/Home/HomeContainer';
-import ResultTable from 'components/common/table/resultTable';
+import ResultTable from 'components/common/table/ResultTable';
 import useUsers from 'hooks/use-users';
 import Typography from '@material-ui/core/Typography';
 

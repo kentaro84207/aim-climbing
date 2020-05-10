@@ -1,7 +1,7 @@
 import React from 'react';
-import Circular from 'components/common/atoms/circular';
+import Circular from 'components/common/atoms/Circular';
 import { Problem } from 'services/models/problem';
-import CheckboxSwitch from 'components/common/switch/checkbox';
+import CheckboxSwitch from 'components/common/switch/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { format } from 'date-fns';

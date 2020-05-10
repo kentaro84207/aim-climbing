@@ -1,6 +1,6 @@
 import React from 'react';
-import ProblemItem from 'components/common/list/problemItem';
-import Circular from 'components/common/atoms/circular';
+import ProblemItem from 'components/common/list/ProblemItem';
+import Circular from 'components/common/atoms/Circular';
 import { Problem } from 'services/models/problem';
 
 type ProblemsProps = { problems: Problem[]; loading?: boolean };
