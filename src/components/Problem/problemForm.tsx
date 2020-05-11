@@ -78,16 +78,16 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
   const imageContent = isEditing ? (
     <img className={classes.image} src={newProblem?.imageURL} alt="" />
   ) : (
-    <input
-      required
-      className={classes.hiddenImage}
-      accept="image/*"
-      id="button-file"
-      type="file"
-      onChange={handleImageAsFile}
-      name="image"
-    />
-  );
+      <input
+        required
+        className={classes.hiddenImage}
+        accept="image/*"
+        id="button-file"
+        type="file"
+        onChange={handleImageAsFile}
+        name="image"
+      />
+    );
 
   if (done) return <Redirect to={`${paths.home}${param}`} />;
 
@@ -153,7 +153,7 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
           </label>
         </div>
         <div className={classes.row}>
-          <Button fullWidth variant="contained" color="primary" type="submit">
+          <Button fullWidth variant="contained" color="primary" type="submit" size="large">
             登録する
           </Button>
         </div>

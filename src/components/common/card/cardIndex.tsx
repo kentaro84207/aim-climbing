@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import ProblemCard from 'components/common/card/problemCard';
-import Circular from 'components/common/atoms/circular';
+import ProblemCard from 'components/common/card/ProblemCard';
+import Circular from 'components/common/atoms/Circular';
 import { UserContext } from 'contexts';
 import { Problem } from 'services/models/problem';
 import paths from 'paths';

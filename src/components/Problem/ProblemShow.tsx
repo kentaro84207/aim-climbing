@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useProblem from 'hooks/use-problem';
 import ProblemContainer from 'containers/Home/ProblemContainer';
-import ProblemContent from 'components/Problem/problemContent';
+import ProblemContent from 'components/Problem/ProblemContent';
 
 const ProblemShow: React.FC = () => {
   const { problemId } = useParams();

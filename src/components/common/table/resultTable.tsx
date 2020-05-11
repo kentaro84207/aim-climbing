@@ -1,6 +1,6 @@
 import React from 'react';
 import { User } from 'services/models/user';
-import Circular from 'components/common/atoms/circular';
+import Circular from 'components/common/atoms/Circular';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

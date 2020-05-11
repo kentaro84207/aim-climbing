@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import firebase from 'firebase/app';
+import { theme } from 'theme';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import firebaseConfig from './firebase-config';
 import FirebaseApp from './FirebaseApp';
 
@@ -13,7 +15,9 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <BrowserRouter>
     <FirebaseApp>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </FirebaseApp>
   </BrowserRouter>,
   document.getElementById('root'),

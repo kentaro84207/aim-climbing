@@ -1,7 +1,7 @@
 import React from 'react';
 import useProblems from 'hooks/use-problems';
 import MypageContainer from 'containers/Home/MypageContainer';
-import ListIndex from 'components/common/list/listIndex';
+import ListIndex from 'components/common/list/ListIndex';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';

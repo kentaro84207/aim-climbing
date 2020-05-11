@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import useProblems from 'hooks/use-problems';
 import HomeContainer from 'containers/Home/HomeContainer';
-import CardIndex from 'components/common/card/cardIndex';
+import CardIndex from 'components/common/card/CardIndex';
 import Toast from 'components/common/toast/Toast';
 import messages from 'common/messages';
 import Typography from '@material-ui/core/Typography';

@@ -1,6 +1,6 @@
 import React from 'react';
 import MypageContainer from 'containers/Home/MypageContainer';
-import ProblemForm from 'components/Problem/problemForm';
+import ProblemForm from 'components/Problem/ProblemForm';
 import Typography from '@material-ui/core/Typography';
 import { blankProblem } from 'services/models/problem';
 
