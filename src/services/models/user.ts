@@ -4,7 +4,7 @@ export type User = {
   id?: string;
   displayName: string;
   problems: string[];
-  points: string;
+  score: number;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };
@@ -12,7 +12,7 @@ export type User = {
 export const blankUser: User = {
   displayName: '',
   problems: [],
-  points: '0',
+  score: 0,
   createdAt: null,
   updatedAt: null,
 };

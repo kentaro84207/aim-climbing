@@ -1,26 +1,21 @@
 type Grades = {
-  a: string;
-  b: string;
-  c: string;
-  d: string;
-  e: string;
-  f: string;
-  g: string;
-  h: string;
-  i: string;
-  [key: string]: string;
+  [key: number]: string;
 };
 
 const grades = {
-  a: '10',
-  b: '20',
-  c: '40',
-  d: '80',
-  e: '160',
-  f: '320',
-  g: '640',
-  h: '1280',
-  i: '2560',
+  0: '10-8級',
+  1: '7級',
+  2: '6級',
+  3: '5級',
+  4: '4級',
+  5: '3級',
+  6: '2級',
+  7: '1級',
+  8: '初段',
+  9: '二段',
+  10: '三段',
+  11: '四段',
+  12: '五段',
 } as Grades;
 
 export default grades;

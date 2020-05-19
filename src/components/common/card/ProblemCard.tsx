@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'services/models/user';
 import { Problem } from 'services/models/problem';
+import grades from 'common/grades';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -44,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, problem }) => {
   const classes = useStyles();
-  const { name, grade, id } = problem;
+  const { setterName, grade, id } = problem;
 
   const ascentUsers = problem && problem.users ? problem.users : [];
   const ascentStatus = user && user.id ? ascentUsers.includes(user.id) : false;
@@ -59,15 +60,15 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, 
               グレード
             </Typography>
             <Typography component="h5" variant="h6">
-              {grade}
+              {grades[grade]}
             </Typography>
           </div>
           <div className={classes.column2}>
             <Typography variant="subtitle1" color="textSecondary">
-              課題名
+              セッター
             </Typography>
             <Typography component="h5" variant="h6">
-              {name}
+              {setterName}
             </Typography>
           </div>
           <div className={classes.center}>{statusLabel}</div>
