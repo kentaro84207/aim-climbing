@@ -2,6 +2,7 @@ import React from 'react';
 import Circular from 'components/common/atoms/Circular';
 import { Problem } from 'services/models/problem';
 import CheckboxSwitch from 'components/common/switch/Checkbox';
+import grades from 'common/grades';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { format } from 'date-fns';
@@ -60,7 +61,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
             グレード
           </Typography>
           <Typography className={classes.column2} component="h5" variant="subtitle1">
-            {problem?.grade}
+            {grades[problem?.grade]}
           </Typography>
         </div>
         <div className={classes.flex}>

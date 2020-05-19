@@ -4,6 +4,7 @@ import { FirebaseContext, UserContext } from 'contexts';
 import writeProblem from 'services/write-problem';
 import paths from 'paths';
 import grades from 'common/grades';
+import points from 'common/points';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -64,8 +65,8 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
 
   const handleFireBaseUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const settedGrade = newProblem.grade;
-    newProblem.point = grades[settedGrade];
+    newProblem.point = points[newProblem.grade];
+
     if (db) {
       writeProblem(db, newProblem, imageAsFile, pid).then(() => {
         setTimeout(() => {
@@ -78,16 +79,16 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
   const imageContent = isEditing ? (
     <img className={classes.image} src={newProblem?.imageURL} alt="" />
   ) : (
-      <input
-        required
-        className={classes.hiddenImage}
-        accept="image/*"
-        id="button-file"
-        type="file"
-        onChange={handleImageAsFile}
-        name="image"
-      />
-    );
+    <input
+      required
+      className={classes.hiddenImage}
+      accept="image/*"
+      id="button-file"
+      type="file"
+      onChange={handleImageAsFile}
+      name="image"
+    />
+  );
 
   if (done) return <Redirect to={`${paths.home}${param}`} />;
 
@@ -98,8 +99,27 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
           <TextField
             required
             fullWidth
+            id="select-grade"
+            select
+            label="グレード"
+            value={newProblem.grade}
+            onChange={updateProblem}
+            helperText="段級グレードです"
+            variant="outlined"
+            name="grade"
+          >
+            {Object.keys(grades).map(k => (
+              <MenuItem key={k} value={Number(k)}>
+                {grades[Number(k)]}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+        <div className={classes.row}>
+          <TextField
+            fullWidth
             id="problem-name"
-            label="課題名"
+            label="課題名(あれば)"
             defaultValue={newProblem.name}
             onChange={updateProblem}
             variant="outlined"
@@ -108,29 +128,9 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
         </div>
         <div className={classes.row}>
           <TextField
-            required
-            fullWidth
-            id="select-grade"
-            select
-            label="グレード"
-            value={newProblem.grade}
-            onChange={updateProblem}
-            helperText="豊田グレードです"
-            variant="outlined"
-            name="grade"
-          >
-            {Object.keys(grades).map(value => (
-              <MenuItem key={value} value={value}>
-                {value}
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
-        <div className={classes.row}>
-          <TextField
             fullWidth
             id="problem-other"
-            label="補足"
+            label="補足(あれば)"
             defaultValue={newProblem.other}
             onChange={updateProblem}
             variant="outlined"

@@ -7,7 +7,7 @@ admin.initializeApp();
 const db = admin.firestore();
 db.settings({ timestampsInSnapshots: true });
 
-export const updatePoints = functions
+export const updateScore = functions
   .region('asia-northeast1')
   .firestore.document('users/{uid}/problems/{pid}')
   .onWrite(async (change, context) => {
@@ -25,12 +25,12 @@ export const updatePoints = functions
     const problemPoint = change.after.exists
       ? Number(problemData.point)
       : -1 * Number(problemData.point);
-    const currentPoints = Number(userData.points);
-    const newPoints = String(currentPoints + problemPoint);
+    const currentScore = Number(userData.score);
+    const newScore = String(currentScore + problemPoint);
     const batch = db.batch();
     batch.update(userRef, {
-      points: newPoints,
+      score: newScore,
     });
     await batch.commit();
-    console.log(newPoints);
+    console.log(newScore);
   });

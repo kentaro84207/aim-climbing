@@ -5,22 +5,22 @@ export type Problem = {
   setterId?: string;
   setterName?: string;
   name: string;
-  grade: string;
+  grade: number;
   other?: string;
   imageURL: string;
   users: string[];
-  point: string;
+  point: number;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };
 
 export const blankProblem: Problem = {
-  grade: '',
+  grade: 0,
   name: '',
   other: '',
   imageURL: '',
   users: [],
-  point: '',
+  point: 0,
   createdAt: null,
   updatedAt: null,
 };

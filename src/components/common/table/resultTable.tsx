@@ -23,20 +23,20 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
 
   if (loading) return <Circular />;
 
-  const createData = (order: number, name: string, points: string) => ({
+  const createData = (order: number, name: string, score: number) => ({
     order,
     name,
-    points,
+    score,
   });
 
-  const sortedUsers = users.sort((a, b) => Number(b.points) - Number(a.points));
+  const sortedUsers = users.sort((a, b) => Number(b.score) - Number(a.score));
 
   const rows = sortedUsers.map((user: User, i: number) => {
     const order = i + 1;
     const name = user.displayName;
-    const { points } = user;
+    const { score } = user;
 
-    return createData(order, name, points);
+    return createData(order, name, score);
   });
 
   return (
@@ -46,7 +46,7 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
           <TableRow>
             <TableCell>順位</TableCell>
             <TableCell align="right">名前</TableCell>
-            <TableCell align="right">ポイント</TableCell>
+            <TableCell align="right">スコア</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -56,7 +56,7 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
                 {row.order}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.points}</TableCell>
+              <TableCell align="right">{row.score}</TableCell>
             </TableRow>
           ))}
         </TableBody>
