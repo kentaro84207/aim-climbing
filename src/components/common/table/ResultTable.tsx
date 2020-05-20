@@ -31,13 +31,15 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
 
   const sortedUsers = users.sort((a, b) => Number(b.score) - Number(a.score));
 
-  const rows = sortedUsers.map((user: User, i: number) => {
-    const order = i + 1;
-    const name = user.displayName;
-    const { score } = user;
+  const rows = sortedUsers
+    .filter(user => user.score > 0)
+    .map((user: User, i: number) => {
+      const order = i + 1;
+      const name = user.displayName;
+      const { score } = user;
 
-    return createData(order, name, score);
-  });
+      return createData(order, name, score);
+    });
 
   return (
     <TableContainer component={Paper}>

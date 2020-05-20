@@ -26,7 +26,7 @@ export const updateScore = functions
       ? Number(problemData.point)
       : -1 * Number(problemData.point);
     const currentScore = Number(userData.score);
-    const newScore = String(currentScore + problemPoint);
+    const newScore = currentScore + problemPoint;
     const batch = db.batch();
     batch.update(userRef, {
       score: newScore,
