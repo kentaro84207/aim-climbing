@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import AddIcon from '@material-ui/icons/Add';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,6 +45,15 @@ const Mypage: React.FC = () => {
       </Typography>
       <div className={classes.root}>
         <List component="nav" aria-label="main mailbox folders">
+          <ListItem button component={Link} to={`mypage/${user?.displayName}`}>
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary={user?.displayName} />
+          </ListItem>
+        </List>
+        <Divider />
+        <List component="nav" aria-label="main mailbox folders">
           <ListItem button component={Link} to="/problem/new">
             <ListItemIcon>
               <AddIcon />
@@ -59,9 +69,6 @@ const Mypage: React.FC = () => {
         </List>
         <Divider />
         <List component="nav" aria-label="secondary mailbox folders">
-          <ListItem button component={Link} to="/login">
-            <ListItemText primary="ログイン" />
-          </ListItem>
           <ListItem button onClick={signOut}>
             <ListItemText primary="ログアウト" />
           </ListItem>
