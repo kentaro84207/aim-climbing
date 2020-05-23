@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Check from '@material-ui/icons/Check';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +19,8 @@ const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
     width: '100%',
-    marginBottom: theme.spacing(2),
+    overflow: 'inherit',
+    marginBottom: theme.spacing(3),
   },
   content: {
     display: 'flex',
@@ -32,23 +34,33 @@ const useStyles = makeStyles(theme => ({
   column2: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '1 1 60%',
+    flex: '1 1 50%',
   },
   center: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flex: '1 1 20%',
+    position: 'relative',
+  },
+  icon: {
+    position: 'absolute',
+    top: '-10px',
+    right: '-7px',
+    color: theme.palette.secondary.main,
   },
 }));
 
 const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, problem }) => {
   const classes = useStyles();
-  const { setterName, grade, id } = problem;
+  const { setterName, grade, id, createdAt } = problem;
 
   const ascentUsers = problem && problem.users ? problem.users : [];
   const ascentStatus = user && user.id ? ascentUsers.includes(user.id) : false;
   const statusLabel = ascentStatus ? <Check color="primary" /> : <div />;
+  const today = new Date();
+  const threeDaysAgo = today.setDate(today.getDate() - 3) / 1000;
+  const isNew = createdAt && createdAt?.seconds > threeDaysAgo;
 
   return (
     <Link className={classes.root} to={`problem/${id}`}>
@@ -58,27 +70,20 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, 
           style={{ backgroundColor: `${gradeColors[grade]}` }}
         >
           <div className={classes.column1}>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              style={{ color: `${contrastText[grade]}` }}
-            >
-              グレード
-            </Typography>
             <Typography component="h5" variant="h6" style={{ color: `${contrastText[grade]}` }}>
               {grades[grade]}
             </Typography>
           </div>
           <div className={classes.column2}>
-            <Typography variant="subtitle1" style={{ color: `${contrastText[grade]}` }}>
-              セッター
-            </Typography>
             <Typography component="h5" variant="h6" style={{ color: `${contrastText[grade]}` }}>
               {setterName}
             </Typography>
           </div>
         </CardContent>
-        <div className={classes.center}>{statusLabel}</div>
+        <div className={classes.center}>
+          {statusLabel}
+          <FiberNewIcon className={classes.icon} style={isNew ? {} : { display: 'none' }} />
+        </div>
       </Card>
     </Link>
   );
