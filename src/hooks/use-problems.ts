@@ -25,7 +25,7 @@ const useProblems = (options?: problemsOptions) => {
     if (!db) throw new Error('Firestore is not initialized');
     const query = db
       .collection(collectionName.problems)
-      .orderBy('createdAt', 'asc')
+      .orderBy('createdAt', 'desc')
       .limit(optionsRef.current.limit!);
 
     const load = async () => {
