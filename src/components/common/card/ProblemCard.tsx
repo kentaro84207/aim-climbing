@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     display: 'flex',
     width: '100%',
+    borderRadius: '4px 0 0 4px',
   },
   column1: {
     display: 'flex',
