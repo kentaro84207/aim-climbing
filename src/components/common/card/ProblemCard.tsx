@@ -52,7 +52,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, problem }) => {
+const ProblemCard: React.FC<{ user: User | null; problem: Problem; hidden: boolean }> = ({
+  user,
+  problem,
+  hidden,
+}) => {
   const classes = useStyles();
   const { setterName, grade, id, createdAt } = problem;
 
@@ -62,9 +66,10 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem }> = ({ user, 
   const today = new Date();
   const threeDaysAgo = today.setDate(today.getDate() - 3) / 1000;
   const isNew = createdAt && createdAt?.seconds > threeDaysAgo;
+  const isHidden = ascentStatus && hidden;
 
   return (
-    <Link className={classes.root} to={`problem/${id}`}>
+    <Link className={classes.root} to={`problem/${id}`} style={isHidden ? { display: 'none' } : {}}>
       <Card className={classes.card}>
         <CardContent
           className={classes.content}
