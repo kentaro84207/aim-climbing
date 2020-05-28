@@ -16,11 +16,15 @@ import Select from '@material-ui/core/Select';
 type ProblemsProps = { problems: Problem[]; loading?: boolean };
 
 const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
+  const sortState = localStorage.getItem('aimSortBy') || 'new';
+  const hideState = localStorage.getItem('aimHideDone') || 'hide';
   const { user } = useContext(UserContext);
-  const [hideChecked, setHideChecked] = useState(false);
-  const [sort, setSort] = useState<string>('new');
+  const [hideChecked, setHideChecked] = useState(hideState === 'hide');
+  const [sort, setSort] = useState<string>(sortState);
 
-  const handleChange = () => {
+  const handleHide = () => {
+    const state = !hideChecked ? 'hide' : 'show';
+    localStorage.setItem('aimHideDone', state);
     setHideChecked(!hideChecked);
   };
 
@@ -29,6 +33,8 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
     setSort(event.target.value as string);
 
     const { value } = event.target;
+
+    localStorage.setItem('aimSortBy', String(value));
 
     if (value === 'new') {
       problems.sort((a, b) => {
@@ -77,12 +83,7 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
       <FormGroup>
         <FormControlLabel
           control={
-            <Switch
-              checked={hideChecked}
-              onChange={handleChange}
-              name="hideSwitch"
-              color="primary"
-            />
+            <Switch checked={hideChecked} onChange={handleHide} name="hideSwitch" color="primary" />
           }
           label="登った課題を非表示にする"
         />
