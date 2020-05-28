@@ -12,6 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Box from '@material-ui/core/Box';
 
 type ProblemsProps = { problems: Problem[]; loading?: boolean };
 
@@ -72,22 +73,39 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
 
   return (
     <>
-      <FormControl>
-        <InputLabel id="select-label">並び替え</InputLabel>
-        <Select labelId="select-label" id="select" value={sort} onChange={handlSort}>
-          <MenuItem value="new">新しい</MenuItem>
-          <MenuItem value="hard">難しい</MenuItem>
-          <MenuItem value="soft">易しい</MenuItem>
-        </Select>
-      </FormControl>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch checked={hideChecked} onChange={handleHide} name="hideSwitch" color="primary" />
-          }
-          label="登った課題を非表示にする"
-        />
-      </FormGroup>
+      <div style={{ width: '100%' }}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          py={2}
+          px={4}
+          mb={2}
+          bgcolor="background.paper"
+        >
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={hideChecked}
+                  onChange={handleHide}
+                  name="hideSwitch"
+                  color="primary"
+                />
+              }
+              label="登った課題を非表示"
+            />
+          </FormGroup>
+          <FormControl>
+            <InputLabel id="select-label">並び替え</InputLabel>
+            <Select labelId="select-label" id="select" value={sort} onChange={handlSort}>
+              <MenuItem value="new">新しい</MenuItem>
+              <MenuItem value="hard">難しい</MenuItem>
+              <MenuItem value="soft">易しい</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </div>
       {problems.map(problem => (
         <ProblemCard user={user} problem={problem} key={problem.id} hidden={hideChecked} />
       ))}
