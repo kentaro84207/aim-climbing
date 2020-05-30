@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ProblemCard from 'components/common/card/ProblemCard';
-import Circular from 'components/common/atoms/Circular';
 import { UserContext } from 'contexts';
 import { Problem } from 'services/models/problem';
 import paths from 'paths';
@@ -16,12 +15,42 @@ import Box from '@material-ui/core/Box';
 
 type ProblemsProps = { problems: Problem[]; loading?: boolean };
 
-const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
+const CardIndex: React.FC<ProblemsProps> = ({ problems }) => {
   const sortState = localStorage.getItem('aimSortBy') || 'new';
   const hideState = localStorage.getItem('aimHideDone') || 'hide';
   const { user } = useContext(UserContext);
   const [hideChecked, setHideChecked] = useState(hideState === 'hide');
   const [sort, setSort] = useState<string>(sortState);
+  const [sortedProblems, setSortedProblems] = useState<Problem[]>(problems);
+
+  const sortProblems = useCallback(
+    (value: string) => {
+      localStorage.setItem('aimSortBy', value);
+
+      if (value === 'new') {
+        const aaa = [...sortedProblems];
+        aaa.sort((a, b) => {
+          const secondsA = a.createdAt ? a.createdAt.seconds : 0;
+          const secondsB = b.createdAt ? b.createdAt.seconds : 0;
+
+          return secondsB - secondsA;
+        });
+        setSortedProblems(aaa);
+      } else {
+        const aaa = [...sortedProblems];
+        aaa.sort((a, b) => {
+          const gradeA = a.grade;
+          const gradeB = b.grade;
+
+          if (value === 'hard') return gradeB - gradeA;
+
+          return gradeA - gradeB;
+        });
+        setSortedProblems(aaa);
+      }
+    },
+    [sortedProblems, setSortedProblems],
+  );
 
   const handleHide = () => {
     const state = !hideChecked ? 'hide' : 'show';
@@ -29,34 +58,16 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
     setHideChecked(!hideChecked);
   };
 
-  // FIXME more clean
   const handlSort = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSort(event.target.value as string);
-
-    const { value } = event.target;
-
-    localStorage.setItem('aimSortBy', String(value));
-
-    if (value === 'new') {
-      problems.sort((a, b) => {
-        const secondsA = a.createdAt ? a.createdAt.seconds : 0;
-        const secondsB = b.createdAt ? b.createdAt.seconds : 0;
-
-        return secondsB - secondsA;
-      });
-    } else {
-      problems.sort((a, b) => {
-        const gradeA = a.grade;
-        const gradeB = b.grade;
-
-        if (value === 'hard') return gradeB - gradeA;
-
-        return gradeA - gradeB;
-      });
-    }
+    const value = String(event.target.value);
+    setSort(value);
+    sortProblems(value);
   };
 
-  if (loading) return <Circular />;
+  useEffect(() => {
+    sortProblems(sort);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!problems.length) {
     return (
@@ -106,7 +117,7 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems, loading }) => {
           </FormControl>
         </Box>
       </div>
-      {problems.map(problem => (
+      {sortedProblems.map(problem => (
         <ProblemCard user={user} problem={problem} key={problem.id} hidden={hideChecked} />
       ))}
     </>
