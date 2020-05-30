@@ -26,7 +26,9 @@ const CheckboxSwitch: React.FC<{ problem: Problem }> = ({ problem }) => {
       switchAscent(db, user.id, pid, !state.checked);
       setState({ ...state, [name]: event.target.checked });
       const path = state.checked ? `${paths.home}` : `${paths.home}?success=done`;
-      history.push(path);
+      setTimeout(() => {
+        history.push(path);
+      }, 500);
     }
   };
 
