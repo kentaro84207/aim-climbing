@@ -10,7 +10,7 @@ const Result: React.FC = () => {
   return (
     <HomeContainer>
       <Typography component="h1" variant="h5">
-        リザルト
+        5・6月のリザルト
       </Typography>
       <ResultTable users={users} loading={loading} />
     </HomeContainer>

@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   return (
     <HomeContainer>
       <Typography component="h1" variant="h5">
-        課題一覧
+        5・6月の課題一覧
       </Typography>
       <CardIndex problems={problems} />
       <Toast text={text} successed={!!param} />
