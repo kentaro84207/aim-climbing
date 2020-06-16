@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 const Problem: React.FC = () => {
   const classes = useStyles();
-  const { problems, loading } = useProblems({ limit: 50 });
+  const { problems, loading } = useProblems({ limit: 70 });
 
   return (
     <MypageContainer>
