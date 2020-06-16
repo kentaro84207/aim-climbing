@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { User } from 'services/models/user';
 import { Problem } from 'services/models/problem';
 import grades, { gradeColors, contrastText } from 'common/grades';
+import { format } from 'date-fns';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -66,6 +67,8 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem; hidden: boole
   const today = new Date();
   const threeDaysAgo = today.setDate(today.getDate() - 3) / 1000;
   const isNew = createdAt && createdAt?.seconds > threeDaysAgo;
+  const createdDate = createdAt?.toDate();
+  const dateMD = createdDate ? format(createdDate, 'MM/dd') : '';
   const isHidden = ascentStatus && hidden;
 
   return (
@@ -75,6 +78,15 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem; hidden: boole
           className={classes.content}
           style={{ backgroundColor: `${gradeColors[grade]}` }}
         >
+          <div className={classes.column1}>
+            <Typography
+              component="h5"
+              variant="subtitle1"
+              style={{ color: `${contrastText[grade]}` }}
+            >
+              {dateMD}
+            </Typography>
+          </div>
           <div className={classes.column1}>
             <Typography component="h5" variant="h6" style={{ color: `${contrastText[grade]}` }}>
               {grades[grade]}

@@ -9,7 +9,7 @@ import messages from 'common/messages';
 import Typography from '@material-ui/core/Typography';
 
 const Home: React.FC = () => {
-  const { problems, loading } = useProblems({ limit: 50 });
+  const { problems, loading } = useProblems({ limit: 70 });
   const query = new URLSearchParams(useLocation().search);
   const param = query.get('success');
   const text = param ? messages[param] : '';
