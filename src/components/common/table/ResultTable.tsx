@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from 'services/models/user';
 import Circular from 'components/common/atoms/Circular';
+import mouse from 'images/mouse.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,6 +16,12 @@ type UsersProps = { users: User[]; loading?: boolean };
 const useStyles = makeStyles({
   table: {
     width: '100%',
+  },
+  mouse: {
+    width: '20px',
+    position: 'relative',
+    top: '6px',
+    left: '5px',
   },
 });
 
@@ -57,7 +64,10 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
               <TableCell component="th" scope="row">
                 {row.order}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
+              <TableCell align="right">
+                {row.name}
+                <img className={classes.mouse} src={mouse} alt="mouse" />
+              </TableCell>
               <TableCell align="right">{row.score}</TableCell>
             </TableRow>
           ))}
