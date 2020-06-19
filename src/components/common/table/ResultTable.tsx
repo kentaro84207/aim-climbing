@@ -30,10 +30,16 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
 
   if (loading) return <Circular />;
 
-  const createData = (order: number, name: string, score: number) => ({
+  const createData = (
+    order: number,
+    name: string,
+    score: number,
+    isMouse: boolean | undefined,
+  ) => ({
     order,
     name,
     score,
+    isMouse,
   });
 
   const sortedUsers = users
@@ -43,9 +49,9 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
   const rows = sortedUsers.map((user: User, i: number) => {
     const order = i + 1;
     const name = user.displayName;
-    const { score } = user;
+    const { score, isMouse } = user;
 
-    return createData(order, name, score);
+    return createData(order, name, score, isMouse);
   });
 
   return (
@@ -66,7 +72,7 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
               </TableCell>
               <TableCell align="right">
                 {row.name}
-                <img className={classes.mouse} src={mouse} alt="mouse" />
+                {row.isMouse && <img className={classes.mouse} src={mouse} alt="mouse" />}
               </TableCell>
               <TableCell align="right">{row.score}</TableCell>
             </TableRow>

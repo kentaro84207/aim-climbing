@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import MypageContainer from 'containers/Home/MypageContainer';
+import MouseSwitch from 'components/common/switch/MouseSwitch';
 import { UserContext } from 'contexts';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -30,9 +30,12 @@ const MypageShow: React.FC = () => {
       </Typography>
       <div className={classes.root}>
         <List component="nav" aria-label="main mailbox folders">
-          <ListItem button component={Link} to="/problem/new">
+          <ListItem>
             <ListItemText secondary="現在のスコア" />
             <ListItemText primary={user?.score} />
+          </ListItem>
+          <ListItem>
+            <MouseSwitch />
           </ListItem>
         </List>
         <Divider />
