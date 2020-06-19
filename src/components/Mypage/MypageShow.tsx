@@ -35,7 +35,7 @@ const MypageShow: React.FC = () => {
             <ListItemText primary={user?.score} />
           </ListItem>
           <ListItem>
-            <MouseSwitch />
+            <MouseSwitch user={user} />
           </ListItem>
         </List>
         <Divider />

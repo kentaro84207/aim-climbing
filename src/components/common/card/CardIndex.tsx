@@ -84,9 +84,6 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems }) => {
 
   return (
     <>
-      <Link style={{ marginBottom: '10px' }} to={`mypage/${user?.displayName}`}>
-        マウスになるにはこちらから
-      </Link>
       <div style={{ width: '100%' }}>
         <Box
           display="flex"

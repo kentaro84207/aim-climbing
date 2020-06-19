@@ -1,17 +1,17 @@
 /* eslint-disable no-alert */
 import React, { useContext, useEffect } from 'react';
 import switchMouse from 'services/switch-mouse';
-import { FirebaseContext, UserContext } from 'contexts';
+import { FirebaseContext } from 'contexts';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { User } from 'services/models/user';
 
-const MouseSwitch: React.FC = () => {
+const MouseSwitch: React.FC<{ user: User | null }> = ({ user }) => {
   const { db } = useContext(FirebaseContext);
-  const { user } = useContext(UserContext);
-  const isMoue = !!user?.isMouse;
+  const isMouse = !!user?.isMouse;
   const [state, setState] = React.useState({
-    checked: isMoue,
+    checked: isMouse,
   });
 
   const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,8 +22,8 @@ const MouseSwitch: React.FC = () => {
   };
 
   useEffect(() => {
-    setState({ checked: isMoue });
-  }, [isMoue]);
+    setState({ checked: isMouse });
+  }, [isMouse]);
 
   return (
     <FormGroup>
