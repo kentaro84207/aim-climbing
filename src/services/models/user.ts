@@ -9,6 +9,7 @@ export type User = {
   problems: string[];
   score: number;
   scores: { [key: string]: number };
+  isMouse?: boolean;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };
