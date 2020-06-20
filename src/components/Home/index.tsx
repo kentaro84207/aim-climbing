@@ -6,6 +6,7 @@ import CardIndex from 'components/common/card/CardIndex';
 import Toast from 'components/common/toast/Toast';
 import Circular from 'components/common/atoms/Circular';
 import messages from 'common/messages';
+import { getThisMonth } from 'utils/getDate';
 import Typography from '@material-ui/core/Typography';
 
 const Home: React.FC = () => {
@@ -19,7 +20,7 @@ const Home: React.FC = () => {
   return (
     <HomeContainer>
       <Typography component="h1" variant="h5">
-        5・6月の課題一覧
+        {getThisMonth}月の課題一覧
       </Typography>
       <CardIndex problems={problems} />
       <Toast text={text} successed={!!param} />

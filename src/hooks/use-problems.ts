@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useContext, useEffect, useRef, useState } from 'react';
-
 import { Problem } from 'services/models/problem';
 import { collectionName } from 'services/constants';
 import { FirebaseContext } from 'contexts';
+import { firstDate, lastDate } from 'utils/getDate';
 
 type problemsOptions = {
   limit?: number;
@@ -25,6 +25,8 @@ const useProblems = (options?: problemsOptions) => {
     if (!db) throw new Error('Firestore is not initialized');
     const query = db
       .collection(collectionName.problems)
+      .where('createdAt', '>=', firstDate)
+      .where('createdAt', '<=', lastDate)
       .orderBy('createdAt', 'desc')
       .limit(optionsRef.current.limit!);
 

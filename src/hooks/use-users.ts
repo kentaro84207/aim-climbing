@@ -5,7 +5,7 @@ import { User } from 'services/models/user';
 import { collectionName } from 'services/constants';
 import { FirebaseContext } from 'contexts';
 
-const useProblems = () => {
+const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,4 +39,4 @@ const useProblems = () => {
   return { users, loading, error };
 };
 
-export default useProblems;
+export default useUsers;
