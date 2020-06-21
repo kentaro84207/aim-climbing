@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from 'services/models/user';
 import Circular from 'components/common/atoms/Circular';
+// import { getYYMM } from 'utils/getDate';
 import mouse from 'images/mouse.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -45,11 +46,15 @@ const ResultTable: React.FC<UsersProps> = ({ users, loading }) => {
   const sortedUsers = users
     .filter(user => user.score > 0)
     .sort((a, b) => Number(b.score) - Number(a.score));
+  // .filter(user => user.scores && user.scores[getYYMM])
+  // .sort((a, b) => Number(b.scores[getYYMM]) - Number(a.scores[getYYMM]));
 
   const rows = sortedUsers.map((user: User, i: number) => {
     const order = i + 1;
     const name = user.displayName;
     const { score, isMouse } = user;
+    // const { scores, isMouse } = user;
+    // const score = scores[getYYMM];
 
     return createData(order, name, score, isMouse);
   });

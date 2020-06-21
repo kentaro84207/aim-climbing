@@ -1,14 +1,14 @@
 import { firestore } from 'firebase/app';
 import { getYYMM } from 'utils/getDate';
 
-const thisYYMM = getYYMM();
+const thisYYMM = getYYMM;
 
 export type User = {
   id?: string;
   displayName: string;
   problems: string[];
   score: number;
-  scores: { [key: string]: number };
+  scores?: { [key: string]: number };
   isMouse?: boolean;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;

@@ -6,7 +6,7 @@ const m = date.getMonth();
 const firstDay = new Date(y, m, 1);
 const lastDay = new Date(y, m + 1, 0);
 
-export const getYYMM = () => format(new Date(), 'yyyy-MM');
+export const getYYMM = format(new Date(), 'yyyyMM');
 
 export const getThisMonth = m + 1;
 
