@@ -3,6 +3,7 @@ import Circular from 'components/common/atoms/Circular';
 import { Problem } from 'services/models/problem';
 import CheckboxSwitch from 'components/common/switch/Checkbox';
 import grades from 'common/grades';
+import walls from 'common/walls';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { format } from 'date-fns';
@@ -62,6 +63,14 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
           </Typography>
           <Typography className={classes.column2} component="h5" variant="subtitle1">
             {grades[problem?.grade]}
+          </Typography>
+        </div>
+        <div className={classes.flex}>
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
+            壁
+          </Typography>
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
+            {walls[problem?.wall]}
           </Typography>
         </div>
         <div className={classes.flex}>

@@ -5,6 +5,7 @@ import writeProblem from 'services/write-problem';
 import paths from 'paths';
 import grades from 'common/grades';
 import points from 'common/points';
+import walls from 'common/walls';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -111,6 +112,25 @@ const ProblemForm: React.FC<{ problem: Problem; pid: string | undefined }> = ({ 
             {Object.keys(grades).map(k => (
               <MenuItem key={k} value={Number(k)}>
                 {grades[Number(k)]}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+        <div className={classes.row}>
+          <TextField
+            required
+            fullWidth
+            id="select-wall"
+            select
+            label="壁"
+            value={newProblem.wall}
+            onChange={updateProblem}
+            variant="outlined"
+            name="wall"
+          >
+            {Object.keys(walls).map(k => (
+              <MenuItem key={k} value={Number(k)}>
+                {walls[Number(k)]}
               </MenuItem>
             ))}
           </TextField>

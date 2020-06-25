@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { User } from 'services/models/user';
 import { Problem } from 'services/models/problem';
 import grades, { gradeColors, contrastText } from 'common/grades';
+import walls from 'common/walls';
 import { format } from 'date-fns';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -59,7 +60,7 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem; hidden: boole
   hidden,
 }) => {
   const classes = useStyles();
-  const { setterName, grade, id, createdAt } = problem;
+  const { setterName, grade, wall, id, createdAt } = problem;
 
   const ascentUsers = problem && problem.users ? problem.users : [];
   const ascentStatus = user && user.id ? ascentUsers.includes(user.id) : false;
@@ -85,6 +86,11 @@ const ProblemCard: React.FC<{ user: User | null; problem: Problem; hidden: boole
               style={{ color: `${contrastText[grade]}` }}
             >
               {dateMD}
+            </Typography>
+          </div>
+          <div className={classes.column1}>
+            <Typography component="h5" variant="h6" style={{ color: `${contrastText[grade]}` }}>
+              {walls[wall]}
             </Typography>
           </div>
           <div className={classes.column1}>
