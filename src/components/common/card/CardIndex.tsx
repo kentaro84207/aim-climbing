@@ -12,10 +12,20 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  label: {
+    '&>span': {
+      fontSize: '0.8rem',
+    },
+  },
+}));
 
 type ProblemsProps = { problems: Problem[]; loading?: boolean };
 
 const CardIndex: React.FC<ProblemsProps> = ({ problems }) => {
+  const classes = useStyles();
   const sortState = localStorage.getItem('aimSortBy') || 'new';
   const hideState = localStorage.getItem('aimHideDone') || 'hide';
   const { user } = useContext(UserContext);
@@ -105,6 +115,7 @@ const CardIndex: React.FC<ProblemsProps> = ({ problems }) => {
                 />
               }
               label="登った課題を非表示"
+              className={classes.label}
             />
           </FormGroup>
           <FormControl>

@@ -32,12 +32,12 @@ const useStyles = makeStyles(theme => ({
   column1: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '1 1 30%',
+    flex: '1 1 20%',
   },
   column2: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '1 1 50%',
+    flex: '1 1 30%',
   },
   center: {
     display: 'flex',
