@@ -23,7 +23,7 @@ const Home: React.FC = () => {
         {getThisMonth}月の課題一覧
       </Typography>
       <Typography component="h6" variant="caption">
-        ※ 前月1週間前の課題まで表示。得点は今月の課題のみ有効。
+        ※ 前月1週間前の課題まで表示
       </Typography>
       <CardIndex problems={problems} />
       <Toast text={text} successed={!!param} />

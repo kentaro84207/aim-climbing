@@ -28,7 +28,7 @@ export const updateMonthScore = functions
     const problemPoint = change.after.exists
       ? Number(problemData.point)
       : -1 * Number(problemData.point);
-    const thisMonth = format(new Date(), 'yyyyMM');
+    const thisMonth = format(new Date().getTime() + 1000 * 60 * 60 * 9, 'yyyyMM');
     const currentScore =
       userData.scores && userData.scores[thisMonth] ? Number(userData.scores[thisMonth]) : 0;
     const newScore = currentScore + problemPoint;
