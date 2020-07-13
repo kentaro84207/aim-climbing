@@ -22,7 +22,7 @@ const Home: React.FC = () => {
       <Typography component="h1" variant="h5">
         {getThisMonth}月の課題一覧
       </Typography>
-      <Typography component="h6" variant="caption">
+      <Typography component="caption" variant="caption">
         ※ 前月1週間前の課題まで表示
       </Typography>
       <CardIndex problems={problems} />
