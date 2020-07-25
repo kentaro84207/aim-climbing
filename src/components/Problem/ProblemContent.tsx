@@ -2,6 +2,7 @@ import React from 'react';
 import Circular from 'components/common/atoms/Circular';
 import { Problem } from 'services/models/problem';
 import CheckboxSwitch from 'components/common/switch/Checkbox';
+import useUsersName from 'hooks/use-usersName';
 import grades from 'common/grades';
 import walls from 'common/walls';
 import Typography from '@material-ui/core/Typography';
@@ -39,6 +40,7 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
   const classes = useStyles();
   const createDate =
     problem && problem.createdAt ? format(problem.createdAt.toDate(), 'yyyy/MM/dd') : '';
+  const { userNames } = useUsersName(problem?.users);
 
   if (loading) return <Circular />;
 
@@ -95,6 +97,14 @@ const ProblemShow: React.FC<{ problem: Problem; loading?: boolean }> = ({ proble
           </Typography>
           <Typography className={classes.column2} component="h5" variant="subtitle1">
             {problem?.users.length}
+          </Typography>
+        </div>
+        <div className={classes.flex}>
+          <Typography className={classes.column1} variant="subtitle1" color="textSecondary">
+            完登者
+          </Typography>
+          <Typography className={classes.column2} component="h5" variant="subtitle1">
+            {userNames.join(', ')}
           </Typography>
         </div>
       </div>
